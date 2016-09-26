@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <%@include  file="CandyShopHeader.html" %>
 </head>
 <body>
 <form method="post" action="login.jsp">
