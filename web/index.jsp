@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
+  <p>HELLO WORLD</p>
+  <img src="https://lh4.googleusercontent.com/-v0soe-ievYE/AAAAAAAAAAI/AAAAAAADjWs/8Cq5VvgZS4E/s0-c-k-no-ns/photo.jpg">
   $END$
   </body>
 </html>
