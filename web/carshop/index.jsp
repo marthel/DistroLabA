@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include  file="CandyShopHeader.html" %>
+    <%@include  file="carshopHeader.html" %>
 </head>
 <body>
 
