@@ -11,8 +11,9 @@ import javax.sql.DataSource;
 public class DatabaseController implements DBContract{
 
 
-    public DatabaseController() throws NamingException{
 
+    public DatabaseController() throws NamingException{
+        System.out.println("jdjdjd");
         InitialContext ctx = new InitialContext();
         DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/MySQLDB");
 
