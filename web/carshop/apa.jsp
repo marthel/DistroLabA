@@ -12,6 +12,8 @@
     <title>Title</title>
 </head>
 <body>
+
+
 <jsp:useBean id="Test" class="BO.Test" />
 <%
     Test tc = new Test();
