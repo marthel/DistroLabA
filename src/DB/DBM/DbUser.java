@@ -1,7 +1,9 @@
-package DB;
+package DB.DBM;
 
 import BO.Models.Car;
 import BO.Models.User;
+import DB.DatabaseException;
+import DB.DbConnPool;
 import DB.Queries.CarQueries;
 import DB.Queries.CustomerQueries;
 import UI.NewSubscriber;

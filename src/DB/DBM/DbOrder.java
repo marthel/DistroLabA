@@ -1,4 +1,4 @@
-package DB;
+package DB.DBM;
 
 import BO.Models.Order;
 

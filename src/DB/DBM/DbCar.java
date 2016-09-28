@@ -1,7 +1,8 @@
-package DB;
+package DB.DBM;
 
 import BO.Models.Car;
-import DB.Contracts.CarContract;
+import DB.DatabaseException;
+import DB.DbConnPool;
 import DB.Queries.CarQueries;
 
 import java.sql.Connection;
