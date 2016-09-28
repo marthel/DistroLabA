@@ -1,6 +1,5 @@
 package BO.Models;
 
-import java.awt.*;
 
 /**
  * Created by Marthin on 2016-09-27.
@@ -10,6 +9,7 @@ public class Car {
     private String year;
     private String manufacturer;
     private int quantity;
+    private int price;
     private String description;
     private byte[] carImage;
     protected  Car()
@@ -24,20 +24,13 @@ public class Car {
         this.description = description;
         this.carImage = carImage;
     }
-    protected Car(String manufacturer, String model, String year, int quantity) {
+    protected Car(String manufacturer, String model, String year, int quantity, int price) {
         this.model = model;
         this.year = year;
         this.manufacturer = manufacturer;
         this.quantity = quantity;
+        this.price = price;
     }
-    protected Car newCar(String manufacturer, String model, String year, int quantity) {
-        this.model = model;
-        this.year = year;
-        this.manufacturer = manufacturer;
-        this.quantity = quantity;
-        return this;
-    }
-
     public String getManufacturer() {
         return manufacturer;
     }

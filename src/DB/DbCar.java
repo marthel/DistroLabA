@@ -15,19 +15,22 @@ import java.util.ArrayList;
  */
 public class DbCar extends Car{
     private DbCar(ResultSet rs) throws SQLException {
-        super(rs.getString("name"),rs.getString("model"),rs.getString("year"),rs.getInt("quantity"));
+        super(rs.getString("name"),rs.getString("model"),rs.getString("year"),rs.getInt("quantity"),rs.getInt("price"));
     }
     public static ArrayList<Car> getAllCars(Connection connection) throws DatabaseException {
         System.out.println("dbCAR");
         ArrayList<Car> cars = new ArrayList<>();
         try {
+            System.out.println("hej");
             PreparedStatement stmnt = connection.prepareStatement(CarQueries.getAllCars());
+            System.out.println("addwdawdawadw");
             ResultSet rs = stmnt.executeQuery();
             while (rs.next()) {
                 cars.add(new DbCar(rs));
             }
             stmnt.close();
         } catch (SQLException ex){
+            System.out.println(ex.getMessage());
             throw new DatabaseException();
         }finally {
             DbConnPool.disconnect(connection);

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Test {
     public Test() throws NamingException, DatabaseException {
         DbContainer db = new DbContainer();
-        System.out.println("TEST");
         ArrayList<Car> cars = db.getAllCars();
+        System.out.println("TEST");
     }
 }
