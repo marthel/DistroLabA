@@ -5,6 +5,6 @@ package DB.Queries;
  */
 public class CarQueries {
     public static String getAllCars() {
-        return "SELECT MANUFACTURER.name, CAR.model, CAR.year, CAR.quantity, CAR.price,  FROM CAR, MANUFACTURER WHERE MANUFACTURER.ID = CAR.manufacturerID";
+        return "SELECT MANUFACTURER.name as name, CAR.model as model, CAR.year as year, CAR.quantity as quantity, CAR.price as price,  FROM CAR JOIN ROLE ON ROLE.email = USER.email WHERE CAR.manufacturerID = MANUFACTURER.ID";
     }
 }

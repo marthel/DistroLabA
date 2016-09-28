@@ -13,8 +13,7 @@ public class DbConnPool {
 
     private Connection connection = null;
     private DataSource dbPool;
-    //private final String datasourceName = "java:/comp/env/jdbc/carshop";
-    private final String datasourceName = "java:comp/env/jdbc/mysql://localhost:3306/carshop";
+    private final String datasourceName = "java:/comp/env/jdbc/db";
     public DbConnPool() throws NamingException{
         dbPool = (DataSource) new InitialContext().lookup(datasourceName);
     }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="">
+
+
+    <ResourceLink name="jdbc/db"
+                  global="jdbc/DATABASE"
+                  type="javax.sql.DataSource" />
+</Context>
