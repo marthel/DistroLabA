@@ -4,6 +4,7 @@ package DB.Queries;
  * Created by Marthin on 2016-09-27.
  */
 public class CarQueries {
+
     public static String getAllCars() {
         return "SELECT "
                 + "MANUFACTURER.name as name, "
@@ -16,4 +17,6 @@ public class CarQueries {
                 + "MANUFACTURER "
                 + "WHERE MANUFACTURER.ID = CAR.manufacturerID";
     }
+
+
 }

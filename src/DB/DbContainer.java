@@ -4,6 +4,7 @@ import BO.Models.Car;
 import DB.Contracts.CarContract;
 import DB.Contracts.CustomerContract;
 import DB.Contracts.OrderContract;
+import UI.NewSubscriber;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -20,5 +21,11 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
     @Override
     public ArrayList<Car> getAllCars() throws DatabaseException {
         return DbCar.getAllCars(getConnection.connect());
+    }
+
+    @Override
+    public boolean addSubscriber(NewSubscriber subscriber) throws DatabaseException{
+        return DbUser.addSubscriber(getConnection.connect(),subscriber);
+
     }
 }
