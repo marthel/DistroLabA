@@ -4,6 +4,7 @@ import BO.Models.Car;
 import DB.DatabaseException;
 import DB.DbConnPool;
 import DB.Queries.CarQueries;
+import DB.Queries.CustomerQueries;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,9 +36,22 @@ public class DbCar extends Car{
         }finally {
             DbConnPool.disconnect(connection);
         }
-        /*for (Car car: cars) {
-            System.out.println(car.getManufacturer()+" "+car.getModel());
-        }*/
+
         return cars;
+    }
+
+    public static void addManufacturer(Connection connection,String manufacturer)throws DatabaseException{
+
+        try {
+            PreparedStatement stmnt = connection.prepareStatement(CarQueries.admin_AddNewManufacturer());
+            stmnt.setString(1,manufacturer);
+            stmnt.execute();
+            stmnt.close();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+            throw new DatabaseException("Manufacturer Already Exist");
+        }finally {
+            DbConnPool.disconnect(connection);
+        }
     }
 }

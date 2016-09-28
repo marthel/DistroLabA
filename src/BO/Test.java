@@ -14,27 +14,31 @@ import java.util.ArrayList;
 public class Test {
     public Test() {
     }
-    public void getAllCars() throws NamingException, DatabaseException {
-        System.out.println("hämtar alla bilar");
+    public void getAllCars() throws NamingException {
+
         DbContainer db = new DbContainer();
 
-
+        System.out.println("<Add New Subscriber>");
         try {
-            if (db.addSubscriber(new NewSubscriber("Marthin","haha","jagärsämst@alban.com"))){
+            db.addSubscriber(new NewSubscriber("Abdulla","haha","jagärsämst@alban.com"));
                 System.out.println("Success, new user added");
-            }else {
-                System.out.println("User Already exists");
-            }
         } catch (DatabaseException e) {
-            e.printStackTrace();
+            System.out.println("!User Already Exist!");
         }
 
 
-        System.out.println("hämtar alla bilar");
+        System.out.println("<Bring All Cars>");
         try {
             ArrayList<Car> cars = db.getAllCars();
         } catch (DatabaseException e) {
-            e.printStackTrace();
+            System.out.println("!Could Not Bring Any Cars!");
+        }
+
+        System.out.println("<Add New Manufacturer>");
+        try {
+            db.addManufacturer("Lambo");
+        } catch (DatabaseException e) {
+            System.out.println("!Could Not Add Manufacturer!");
         }
 
 

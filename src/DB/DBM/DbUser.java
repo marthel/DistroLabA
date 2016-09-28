@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class DbUser extends User {
 
 
-    public static boolean addSubscriber(Connection connection, NewSubscriber subscriber) throws DatabaseException {
+    public static void addSubscriber(Connection connection, NewSubscriber subscriber) throws DatabaseException {
         System.out.println("DB-USER");
-        boolean success = false;
+
         try {
             PreparedStatement stmnt = connection.prepareStatement(CustomerQueries.addUser());
             stmnt.setString(1,subscriber.getUser_name());
@@ -31,7 +31,6 @@ public class DbUser extends User {
             stmnt.execute();
 
             stmnt.close();
-            success = true;
         } catch (SQLException ex){
             System.out.println("no connection");
             System.out.println(ex.getMessage());
@@ -40,6 +39,5 @@ public class DbUser extends User {
             DbConnPool.disconnect(connection);
         }
 
-        return success;
     }
 }

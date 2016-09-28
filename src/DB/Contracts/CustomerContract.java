@@ -8,5 +8,5 @@ import UI.NewSubscriber;
  */
 public interface CustomerContract {
 
-    public boolean addSubscriber(NewSubscriber subscriber) throws DatabaseException;
+    void addSubscriber(NewSubscriber subscriber) throws DatabaseException;
 }

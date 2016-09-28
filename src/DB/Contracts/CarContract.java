@@ -10,5 +10,6 @@ import java.util.ArrayList;
  * Created by Marthin on 2016-09-27.
  */
 public interface CarContract {
-    public ArrayList<Car> getAllCars() throws DatabaseException;
+    ArrayList<Car> getAllCars() throws DatabaseException;
+    void addManufacturer(String manufacturer)throws DatabaseException;
 }

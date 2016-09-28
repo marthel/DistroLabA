@@ -25,8 +25,13 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
     }
 
     @Override
-    public boolean addSubscriber(NewSubscriber subscriber) throws DatabaseException{
-        return DbUser.addSubscriber(getConnection.connect(),subscriber);
+    public void addSubscriber(NewSubscriber subscriber) throws DatabaseException{
+        DbUser.addSubscriber(getConnection.connect(),subscriber);
 
+    }
+
+    @Override
+    public void addManufacturer(String manufacturer) throws DatabaseException {
+        DbCar.addManufacturer(getConnection.connect(),manufacturer);
     }
 }

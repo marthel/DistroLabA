@@ -18,5 +18,17 @@ public class CarQueries {
                 + "WHERE MANUFACTURER.ID = CAR.manufacturerID";
     }
 
+    //----------------------INSERTION----------------------\\
+    public static String admin_AddNewCar() {
+        return "INSERT INTO CAR(model,year,quantity,price)" +
+                "VALUES(?,?,?,?)";
+    }
+    public static String admin_AddNewManufacturer(){
+        return "INSERT INTO MANUFACTURER(name)" +
+                "VALUES(?)";
+    }
+
+
+
 
 }
