@@ -35,7 +35,7 @@ public class DbUser extends User {
             System.out.println(ex.getMessage());
             throw new DatabaseException("Could not add user, Already Exist");
         }finally {
-            //DbConnPool.disconnect(connection);
+            DbConnPool.disconnect(connection);
         }
 
         return success;

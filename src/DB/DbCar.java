@@ -32,7 +32,7 @@ public class DbCar extends Car{
             System.out.println(ex.getMessage());
             throw new DatabaseException();
         }finally {
-            //DbConnPool.disconnect(connection);
+            DbConnPool.disconnect(connection);
         }
         /*for (Car car: cars) {
             System.out.println(car.getManufacturer()+" "+car.getModel());
