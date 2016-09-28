@@ -24,4 +24,25 @@ public class Car {
         this.description = description;
         this.carImage = carImage;
     }
+    protected Car(String manufacturer, String model, String year, int quantity) {
+        this.model = model;
+        this.year = year;
+        this.manufacturer = manufacturer;
+        this.quantity = quantity;
+    }
+    protected Car newCar(String manufacturer, String model, String year, int quantity) {
+        this.model = model;
+        this.year = year;
+        this.manufacturer = manufacturer;
+        this.quantity = quantity;
+        return this;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public String getModel() {
+        return model;
+    }
 }
