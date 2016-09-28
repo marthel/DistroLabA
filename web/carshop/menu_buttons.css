@@ -1,0 +1,64 @@
+/*Four Buttons To The Left */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+.left_buttons{
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    font-family: Open Sans, sans-serif;
+}
+
+.left_buttons:hover {
+    background-color: rgba(17, 17, 17, 0.60);
+}
+
+/*Two Buttons To The Right */
+
+.right_buttons{
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    font-family: Open Sans, sans-serif;
+}
+
+.right_buttons:hover {
+    background-color: rgba(17, 17, 17, 0.60);
+}
+
+.slide-down-page {
+    position: absolute;
+    width: 100%;
+    box-sizing: content-box;
+    background-color: #333333;
+    text-align: right;
+}
+.content {
+    height: 1800px;
+    background-color: #e0e0e0;
+    text-align: center;
+}
+
+.background-wrap{
+    width: inherit;
+    height: auto;
+    overflow: auto;
+}
+#video-bg-content{
+    width: 100%    !important;
+    height: auto   !important;
+    left: 0;
+    min-height: 100%;
+    min-width: 100%;
+}

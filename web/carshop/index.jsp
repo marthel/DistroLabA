@@ -9,12 +9,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include  file="carshopHeader.html" %>
+    <link rel="stylesheet" type="text/css" href="menu_buttons.css">
 </head>
 <body>
+<!--Animation Page Move Up and Down -->
+<div class="slide-down-page">
+    <a href="#" class="right_buttons" id="close">Close</a>
+</div>
 
-<p>index</p>
-<a href="login.jsp">login</a>
+<div class="content">
+    <!--Menu Bar-->
+    <%@include file="carshopHeader.html" %>
+
+    <!--Video-->
+    <div class="background-wrap">
+        <video id="video-bg-content"  preload="auto" autoplay="autoplay" loop="loop" src="background.mp4">
+            Video Not Supported By Your Browser.
+        </video>
+    </div>
+
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="home_animation.js">
+
+</script>
 </body>
 </html>
 
