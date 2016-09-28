@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class Test {
     public Test() throws NamingException, DatabaseException {
+        System.out.println("hämtar alla bilar");
         DbContainer db = new DbContainer();
         ArrayList<Car> cars = db.getAllCars();
-        System.out.println("TEST");
     }
 }
