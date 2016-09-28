@@ -11,7 +11,6 @@ import java.sql.SQLException;
  */
 public class DbConnPool {
 
-    private Connection connection = null;
     private DataSource dbPool;
     private final String datasourceName = "java:/comp/env/jdbc/db";
     public DbConnPool() throws NamingException{
@@ -19,15 +18,12 @@ public class DbConnPool {
     }
 
     public Connection connect() {
-        if (connection == null) {
-            try {
-                connection = dbPool.getConnection();
-            }  catch (SQLException ex) {
+        try {
+                return dbPool.getConnection();
+            } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
                 return null;
             }
-        }
-        return connection;
     }
     public static boolean disconnect(Connection connection) {
         try {

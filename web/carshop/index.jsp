@@ -19,11 +19,12 @@
 
 <div class="content">
     <!--Menu Bar-->
-    <%@include file="carshopHeader.html" %>
+
 
     <!--Video-->
     <div class="background-wrap">
-        <video id="video-bg-content"  preload="auto" autoplay="autoplay" loop="loop" src="background.mp4">
+        <%@include file="carshopHeader.html" %>
+        <video  id="video-bg-content"  preload="auto" autoplay="autoplay" loop="loop" src="background.mp4">
             Video Not Supported By Your Browser.
         </video>
     </div>

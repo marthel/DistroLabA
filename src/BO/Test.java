@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Test {
     public Test() {
     }
-    public void getAllCars() throws NamingException, DatabaseException {
+    public void getAllCars(String msg) throws NamingException, DatabaseException {
         System.out.println("hämtar alla bilar");
         DbContainer db = new DbContainer();
         ArrayList<Car> cars = db.getAllCars();

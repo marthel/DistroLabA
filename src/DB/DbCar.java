@@ -18,12 +18,9 @@ public class DbCar extends Car{
         super(rs.getString("name"),rs.getString("model"),rs.getString("year"),rs.getInt("quantity"),rs.getInt("price"));
     }
     public static ArrayList<Car> getAllCars(Connection connection) throws DatabaseException {
-        System.out.println("dbCAR");
         ArrayList<Car> cars = new ArrayList<>();
         try {
-            System.out.println("hej");
             PreparedStatement stmnt = connection.prepareStatement(CarQueries.getAllCars());
-            System.out.println("addwdawdawadw");
             ResultSet rs = stmnt.executeQuery();
             while (rs.next()) {
                 cars.add(new DbCar(rs));
@@ -35,9 +32,9 @@ public class DbCar extends Car{
         }finally {
             DbConnPool.disconnect(connection);
         }
-        for (Car car: cars) {
+        /*for (Car car: cars) {
             System.out.println(car.getManufacturer()+" "+car.getModel());
-        }
+        }*/
         return cars;
     }
 }
