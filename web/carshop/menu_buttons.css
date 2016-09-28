@@ -53,6 +53,7 @@ ul {
     z-index: 1;
 }
 .content {
+    position: relative;
     height: 1800px;
     background-color: #e0e0e0;
     text-align: center;
@@ -62,15 +63,14 @@ ul {
     width: inherit;
     height: auto;
     overflow: auto;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 #video-bg-content{
     width: 100%    !important;
     height: auto   !important;
-    left: 0;
-    min-height: 100%;
-    min-width: 100%;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    z-index: 0;
+}
+img {
+    position: relative;
 }

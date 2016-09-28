@@ -20,7 +20,8 @@ jQuery(document).ready(function($) {
     });
 
     $("#close").click(function(){
-
+        slideDownPage.animate({'top': -winHeight}, animSpeed);
+        content.animate({'margin-top': 0},animSpeed);
     });
 
     $(document).on('scroll', function(){

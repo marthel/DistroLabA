@@ -3,6 +3,7 @@ package BO;
 import BO.Models.Car;
 import DB.DatabaseException;
 import DB.DbContainer;
+import UI.NewSubscriber;
 
 import javax.naming.NamingException;
 import java.util.ArrayList;

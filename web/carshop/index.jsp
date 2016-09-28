@@ -20,13 +20,13 @@
 <div class="content">
     <!--Menu Bar-->
 
-
+    <%@include file="carshopHeader.html" %>
     <!--Video-->
     <div class="background-wrap">
-        <%@include file="carshopHeader.html" %>
         <video  id="video-bg-content"  preload="auto" autoplay="autoplay" loop="loop" src="background.mp4">
             Video Not Supported By Your Browser.
         </video>
+        <img src="http://pictures.topspeed.com/IMG/crop/201211/2014-mercedes-sls-amg-bla-19_1600x0w.jpg"/>
     </div>
 
 </div>
