@@ -12,12 +12,29 @@
     <link rel="stylesheet" type="text/css" href="menu_buttons.css">
 </head>
 <body>
+
 <!--Animation Page Move Up and Down -->
 <div class="slide-down-page">
     <a href="#" class="right-buttons-drop-down" id="close">Close</a>
     <div class="text-align-pos">
-        <input type="text" class="text-box-drop-down">
-        <input type="text" class="text-box-drop-down">
+
+        <br>
+        Gary nr 1
+        <br>
+        <input type="text" class="text-box-drop-down" align="center">
+        <br>
+        <br>
+        Gary nr 1
+        <br>
+        <input type="text" class="text-box-drop-down" align="center">
+        <br>
+        <br>
+        Gary nr 1
+        <br>
+        <input type="password" class="text-box-drop-down" align="center">
+        <br>
+
+
     </div>
 </div>
 

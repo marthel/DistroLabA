@@ -73,6 +73,5 @@ public class DbOrder extends Order {
         }
 
         return orders;
-
     }
 }

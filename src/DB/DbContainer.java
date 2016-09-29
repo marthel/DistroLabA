@@ -40,8 +40,8 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
     @Override
     public void addSubscriber(NewSubscriber subscriber) throws DatabaseException{
         DbUser.addSubscriber(getConnection.connect(),subscriber);
-
     }
+    //TODO Get subscriber men måste typ göra en session eller något så att vi vet vem som är vem
     //----------------------DbOrder---------------------
     @Override
     public void createOrder(ArrayList<Order> orders) throws DatabaseException {
