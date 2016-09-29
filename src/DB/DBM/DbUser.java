@@ -32,7 +32,6 @@ public class DbUser extends User {
 
             stmnt.close();
         } catch (SQLException ex){
-            System.out.println("no connection");
             System.out.println(ex.getMessage());
             throw new DatabaseException("Could not add user, Already Exist");
         }finally {

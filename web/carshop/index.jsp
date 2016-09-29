@@ -14,8 +14,15 @@
 <body>
 <!--Animation Page Move Up and Down -->
 <div class="slide-down-page">
-    <a href="#" class="right_buttons" id="close">Close</a>
+    <a href="#" class="right-buttons-drop-down" id="close">Close</a>
+    <div class="text-align-pos">
+        <input type="text" class="text-box-drop-down">
+        <input type="text" class="text-box-drop-down">
+    </div>
 </div>
+
+
+
 
 <div class="content">
     <!--Menu Bar-->
@@ -30,6 +37,8 @@
     </div>
 
 </div>
+
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="home_animation.js">

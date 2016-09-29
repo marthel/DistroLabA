@@ -27,9 +27,10 @@ public class Test {
         }
 
 
-        System.out.println("<Bring All Cars>");
+
         try {
             ArrayList<Car> cars = db.getAllCars();
+            System.out.println("<Bring All Cars>");
         } catch (DatabaseException e) {
             System.out.println("!Could Not Bring Any Cars!");
         }
