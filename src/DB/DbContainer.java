@@ -47,4 +47,8 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
     public void createOrder(ArrayList<Order> orders) throws DatabaseException {
         DbOrder.createOrders(getConnection.connect(),orders);
     }
+
+    public ArrayList<Order> getOrders()throws DatabaseException{
+        return DbOrder.getOrders(getConnection.connect());
+    }
 }

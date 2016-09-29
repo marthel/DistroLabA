@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public interface OrderContract {
 
     void createOrder(ArrayList<Order> orders)throws DatabaseException;
-
-
+    ArrayList<Order> getOrders()throws DatabaseException;
 
 }

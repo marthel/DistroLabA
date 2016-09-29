@@ -16,12 +16,21 @@ public class Order {
     private String phone;
     private String address;
 
-    public Order(Date oDate, Date sDate, String status, ArrayList<Car> cars, String firstName, String lastName, String phone, String address) {
+    public Order(Date oDate, Date sDate, String status, String firstName, String lastName, String phone, String address) {
         this.oDate = oDate;
         this.sDate = sDate;
         this.status = status;
-        this.cars = cars;
         this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.address = address;
+    }
+    public Order(Date oDate, Date sDate, String status,ArrayList<Car> cars, String firstName, String lastName, String phone, String address) {
+        this.oDate = oDate;
+        this.sDate = sDate;
+        this.status = status;
+        this.firstName = firstName;
+        this.cars = cars;
         this.lastName = lastName;
         this.phone = phone;
         this.address = address;

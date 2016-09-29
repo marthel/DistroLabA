@@ -50,7 +50,7 @@ public class Test {
             e.printStackTrace();
         }
 
-
+        System.out.println("<Create New Orders>");
         try {
             ArrayList<Car> items = new ArrayList<>();
             items.add(new Car("Marcedes","audi","1991",50,999999));
@@ -58,6 +58,17 @@ public class Test {
             orders.add(new Order(new Date(),new Date(),"Working",items,"Marthin","Abdullson","00300303","world trade center"));
 
             db.createOrder(orders);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("<Get Users Orders>");
+        try {
+
+            for (Order o: db.getOrders()) {
+                System.out.println(o.getAddress() + " " + o.getsDate());
+            }
+
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
