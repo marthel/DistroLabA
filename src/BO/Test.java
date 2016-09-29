@@ -26,8 +26,6 @@ public class Test {
             System.out.println("!User Already Exist!");
         }
 
-
-
         try {
             ArrayList<Car> cars = db.getAllCars();
             System.out.println("<Bring All Cars>");
@@ -40,6 +38,13 @@ public class Test {
             db.addManufacturer("Lambo");
         } catch (DatabaseException e) {
             System.out.println("!Could Not Add Manufacturer!");
+        }
+
+        System.out.println("<Add New Description>");
+        try {
+            db.addCarDescription(1,"Den är snygg som fan");
+        } catch (DatabaseException e) {
+            e.printStackTrace();
         }
 
 

@@ -27,6 +27,10 @@ public class CarQueries {
         return "INSERT INTO MANUFACTURER(name)" +
                 "VALUES(?)";
     }
+    public static String admin_AddCarDescription(){
+        return "INSERT INTO CARDESCRIPTION(carID,description)" +
+                "VALUES(?,?)";
+    }
 
 
 

@@ -23,6 +23,15 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
     public ArrayList<Car> getAllCars() throws DatabaseException {
         return DbCar.getAllCars(getConnection.connect());
     }
+    @Override
+    public void addManufacturer(String manufacturer) throws DatabaseException {
+        DbCar.addManufacturer(getConnection.connect(),manufacturer);
+    }
+
+    @Override
+    public void addCarDescription(int carID,String description) throws DatabaseException {
+        DbCar.addCarDescription(getConnection.connect(),carID,description);
+    }
 
     @Override
     public void addSubscriber(NewSubscriber subscriber) throws DatabaseException{
@@ -30,8 +39,6 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
 
     }
 
-    @Override
-    public void addManufacturer(String manufacturer) throws DatabaseException {
-        DbCar.addManufacturer(getConnection.connect(),manufacturer);
-    }
+
+
 }

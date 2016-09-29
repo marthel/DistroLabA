@@ -54,4 +54,21 @@ public class DbCar extends Car{
             DbConnPool.disconnect(connection);
         }
     }
+
+    //TODO make carID and Description as an Object
+    public static void addCarDescription(Connection connection,int carID,String description) throws DatabaseException {
+
+        try {
+            PreparedStatement stmnt = connection.prepareStatement(CarQueries.admin_AddCarDescription());
+            stmnt.setInt(1,carID);
+            stmnt.setString(2,description);
+            stmnt.execute();
+            stmnt.close();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+            throw new DatabaseException("Description Already Exist");
+        }finally {
+            DbConnPool.disconnect(connection);
+        }
+    }
 }

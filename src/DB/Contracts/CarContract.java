@@ -12,4 +12,5 @@ import java.util.ArrayList;
 public interface CarContract {
     ArrayList<Car> getAllCars() throws DatabaseException;
     void addManufacturer(String manufacturer)throws DatabaseException;
+    void addCarDescription(int carID,String description)throws DatabaseException;
 }
