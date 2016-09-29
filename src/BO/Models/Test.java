@@ -1,12 +1,15 @@
-package BO;
+package BO.Models;
 
 import BO.Models.Car;
+import BO.Models.Order;
 import DB.DatabaseException;
 import DB.DbContainer;
 import UI.NewSubscriber;
 
 import javax.naming.NamingException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by Marthin on 2016-09-28.
@@ -48,5 +51,15 @@ public class Test {
         }
 
 
+        try {
+            ArrayList<Car> items = new ArrayList<>();
+            items.add(new Car("Marcedes","audi","1991",50,999999));
+            ArrayList<Order> orders = new ArrayList<>();
+            orders.add(new Order(new Date(),new Date(),"Working",items,"Marthin","Abdullson","00300303","world trade center"));
+
+            db.createOrder(orders);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,10 +1,12 @@
 package DB;
 
 import BO.Models.Car;
+import BO.Models.Order;
 import DB.Contracts.CarContract;
 import DB.Contracts.CustomerContract;
 import DB.Contracts.OrderContract;
 import DB.DBM.DbCar;
+import DB.DBM.DbOrder;
 import DB.DBM.DbUser;
 import UI.NewSubscriber;
 
@@ -19,6 +21,8 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
     public DbContainer() throws NamingException {
         getConnection = new DbConnPool();
     }
+
+    //----------------------DbCar---------------------
     @Override
     public ArrayList<Car> getAllCars() throws DatabaseException {
         return DbCar.getAllCars(getConnection.connect());
@@ -32,13 +36,15 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
     public void addCarDescription(int carID,String description) throws DatabaseException {
         DbCar.addCarDescription(getConnection.connect(),carID,description);
     }
-
+    //----------------------DbUser---------------------
     @Override
     public void addSubscriber(NewSubscriber subscriber) throws DatabaseException{
         DbUser.addSubscriber(getConnection.connect(),subscriber);
 
     }
-
-
-
+    //----------------------DbOrder---------------------
+    @Override
+    public void createOrder(ArrayList<Order> orders) throws DatabaseException {
+        DbOrder.createOrders(getConnection.connect(),orders);
+    }
 }

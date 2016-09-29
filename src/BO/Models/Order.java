@@ -15,4 +15,48 @@ public class Order {
     private String lastName;
     private String phone;
     private String address;
+
+    public Order(Date oDate, Date sDate, String status, ArrayList<Car> cars, String firstName, String lastName, String phone, String address) {
+        this.oDate = oDate;
+        this.sDate = sDate;
+        this.status = status;
+        this.cars = cars;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public Order() {
+    }
+
+    public Date getoDate() { return oDate; }
+
+    public Date getsDate() {
+        return sDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public ArrayList<Car> getCars() {
+        return cars;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }
