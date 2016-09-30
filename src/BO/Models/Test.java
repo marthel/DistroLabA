@@ -15,10 +15,14 @@ import java.util.Objects;
  * Created by Marthin on 2016-09-28.
  */
 public class Test {
+
     public Test() {
     }
-    public void getAllCars() throws NamingException {
 
+    static DbContainer db;
+
+    public void getAllCars() throws NamingException {
+        db = new DbContainer();
         DbContainer db = new DbContainer();
 
         System.out.println("<Add New Subscriber>");
@@ -72,5 +76,18 @@ public class Test {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void addNewUser(String usr,String password,String comfirmPass) throws NamingException {
+        db = new DbContainer();
+
+        System.out.println("<Add New Subscriber>");
+        try {
+            db.addSubscriber(new NewSubscriber(usr,password,comfirmPass));
+            System.out.println("Success, new user added");
+        } catch (DatabaseException e) {
+            System.out.println("!User Already Exist!");
+        }
+
     }
 }

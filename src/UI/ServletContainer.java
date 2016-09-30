@@ -1,5 +1,8 @@
 package UI;
 
+import BO.Models.Test;
+
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,9 +18,16 @@ import java.io.IOException;
 public class ServletContainer extends HttpServlet implements javax.servlet.Servlet{
 
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("User: " + req.getParameter("password"));
+
+        try {
+            Test.addNewUser(req.getParameter("usr-name"),req.getParameter("password"),req.getParameter("confirm-password"));
+        } catch (NamingException e) {
+            System.out.println("username already exist");
+        }
         //req.setAttribute();
         //req.getRequestDispatcher("apa.jsp").forward(req,resp);
 
