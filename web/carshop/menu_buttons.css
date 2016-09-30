@@ -105,3 +105,17 @@ img {
     padding-top: 100px;
     text-align: center;
 }
+
+.text-in-drop-down{
+
+    color: white;
+    font-family: Calibri, sans-serif;
+    font-size: 15px;
+
+}
+.Welcome{
+    margin-top: 100px;
+    color: white;
+    font-family: Calibri, sans-serif;
+    font-size: 30px;
+}
