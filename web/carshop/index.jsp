@@ -18,7 +18,7 @@
     <a href="#" class="right-buttons-drop-down" id="close">Close</a>
     <div class="text-align-pos">
 
-        <form action="/ServletContainer">
+        <form action="/AuthenticationServlet">
         <br>
         <h1 class="text-in-drop-down">
             Username
