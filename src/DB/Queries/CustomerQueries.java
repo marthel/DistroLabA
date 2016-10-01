@@ -6,8 +6,15 @@ package DB.Queries;
 public class CustomerQueries {
 
 
-    public static String addUser() {
+    public static String addSubscriber() {
         return "INSERT INTO USER(username,email,password)" +
                 "VALUES(?,?,?)";
+    }
+
+    public static String getSubscriber(){
+        return "SELECT USER.username," +
+                "USER.email,USER.password," +
+                "USER.role " +
+                "FROM USER WHERE USER.username = ?";
     }
 }

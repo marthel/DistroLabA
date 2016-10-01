@@ -18,23 +18,32 @@
     <a href="#" class="right-buttons-drop-down" id="close">Close</a>
     <div class="text-align-pos">
 
+        <form action="/AuthenticationServlet">
         <br>
-        Gary nr 1
+        <h1 class="text-in-drop-down">
+            Username
+        </h1>
+        <input name="usr-name" type="text" class="text-box-drop-down" align="center">
         <br>
-        <input type="text" class="text-box-drop-down" align="center">
+        <h1 class="text-in-drop-down">
+            Password
+        </h1>
+        <input name="password" type="password" class="text-box-drop-down" align="center">
+        <br>
+        <h1 class="text-in-drop-down">
+            Confirm password
+        </h1>
+        <input name="confirm-password" type="password" class="text-box-drop-down" align="center">
         <br>
         <br>
-        Gary nr 1
         <br>
-        <input type="text" class="text-box-drop-down" align="center">
-        <br>
-        <br>
-        Gary nr 1
-        <br>
-        <input type="password" class="text-box-drop-down" align="center">
-        <br>
-
-
+        <div class="wrapper">
+            <button class="submit">Submit</button>
+        </div>
+        <h1 class="Welcome">
+            WELCOME
+        </h1>
+        </form>
     </div>
 </div>
 

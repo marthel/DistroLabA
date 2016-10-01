@@ -55,6 +55,13 @@ public class DbOrder extends Order {
         }
     }
 
+    /**
+     * TODO måste byggas om så att man kan skicka in en user id för att hämta
+     * specefika order.
+     * @param connection
+     * @return
+     * @throws DatabaseException
+     */
     public static ArrayList<Order> getOrders(Connection connection) throws DatabaseException {
 
         ArrayList<Order> orders = new ArrayList<>();

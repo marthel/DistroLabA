@@ -105,3 +105,35 @@ img {
     padding-top: 100px;
     text-align: center;
 }
+
+.text-in-drop-down{
+
+    color: white;
+    font-family: Calibri, sans-serif;
+    font-size: 15px;
+
+}
+.Welcome{
+    margin-top: 60px;
+    color: white;
+    font-family: Calibri, sans-serif;
+    font-size: 30px;
+}
+
+.wrapper {
+    text-align: center;
+    margin: auto;
+}
+
+.submit{
+    display: block;
+    margin: auto;
+    padding: 16px;
+    width: 100px;
+    font-size: 20px;
+    font-family: Open Sans, sans-serif;
+
+}
+
+
+

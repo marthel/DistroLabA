@@ -2,13 +2,14 @@ package DB;
 
 import BO.Models.Car;
 import BO.Models.Order;
+import BO.Models.User;
 import DB.Contracts.CarContract;
 import DB.Contracts.CustomerContract;
 import DB.Contracts.OrderContract;
 import DB.DBM.DbCar;
 import DB.DBM.DbOrder;
 import DB.DBM.DbUser;
-import UI.NewSubscriber;
+import UI.Subscriber;
 
 import javax.naming.NamingException;
 import java.util.ArrayList;
@@ -48,8 +49,14 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
 
     //----------------------DbUser---------------------
     @Override
-    public void addSubscriber(NewSubscriber subscriber) throws DatabaseException{
+    public void addSubscriber(Subscriber subscriber) throws DatabaseException{
+        System.out.println("22222222");
         DbUser.addSubscriber(getConnection.connect(),subscriber);
+    }
+
+    @Override
+    public User getSubscriber(Subscriber subscriber)throws DatabaseException{
+        return DbUser.getSubscriber(getConnection.connect(),subscriber);
     }
     //TODO Get subscriber men måste typ göra en session eller något så att vi vet vem som är vem
     //----------------------DbOrder---------------------

@@ -1,48 +1,36 @@
-package BO;
+package BO.Models;
 
-import BO.Models.Car;
-import BO.Models.Order;
 import DB.DatabaseException;
 import DB.DbContainer;
-import UI.NewSubscriber;
+import UI.Subscriber;
 
 import javax.naming.NamingException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * Created by Marthin on 2016-09-28.
  */
 public class Test {
-    public Test() {
+
+    private DbContainer db;
+    public Test() throws NamingException {
+        db = new DbContainer();
     }
-    public void getAllCars() throws NamingException {
 
-        DbContainer db = new DbContainer();
 
-        System.out.println("<find cars by manufacturer>");
-        try {
-            ArrayList<Car> cars = db.findCarsByManufacturer("AUDI");
-            System.out.println("<Bring All Cars>");
-        } catch (DatabaseException e) {
-            System.out.println("!Could Not Bring Any Cars!");
-        }
-/*
+
+    public void getCars() throws NamingException {
+
+
         System.out.println("<Add New Subscriber>");
         try {
-            db.addSubscriber(new NewSubscriber("Abdulla","haha","jagärsämst@alban.com"));
+            db.addSubscriber(new Subscriber("Abdulla","haha","jagärsämst@alban.com"));
                 System.out.println("Success, new user added");
         } catch (DatabaseException e) {
             System.out.println("!User Already Exist!");
         }
-        System.out.println("<get all cars>");
-        try {
-            ArrayList<Car> cars = db.getAllCars();
-            System.out.println("<Bring All Cars>");
-        } catch (DatabaseException e) {
-            System.out.println("!Could Not Bring Any Cars!");
-        }
+
 
         System.out.println("<Add New Manufacturer>");
         try {
@@ -80,6 +68,43 @@ public class Test {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
-        */
+    }
+
+    public ArrayList<Car> getAllCars(){
+
+        ArrayList<Car> cars = null;
+        try {
+            cars = db.getAllCars();
+            System.out.println("<Bring All Cars>");
+        } catch (DatabaseException e) {
+            System.out.println("!Could Not Bring Any Cars!");
+        }
+        return cars;
+    }
+
+    public void addNewUser(String usr,String password,String confirmPass) throws DatabaseException {
+
+        System.out.println("<Add New Subscriber>");
+        try {
+            System.out.println("11111111");
+            db.addSubscriber(new Subscriber(usr,password,confirmPass));
+            System.out.println("Success, new user added");
+        } catch (DatabaseException e) {
+            System.out.println("!User Already Exist!");
+        }
+
+    }
+
+    public void getUserWithReqName(Subscriber subscriber){
+
+        User user = null;
+        try {
+            user = db.getSubscriber(subscriber);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+        if (!user.equals("null"))
+            System.out.println("USER FOUND: " + user.getUsername() + user.getPassword());
+
     }
 }
