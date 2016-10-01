@@ -4,7 +4,6 @@ import BO.Models.Car;
 import DB.DatabaseException;
 import DB.DbConnPool;
 import DB.Queries.CarQueries;
-import DB.Queries.CustomerQueries;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,6 +36,24 @@ public class DbCar extends Car{
             DbConnPool.disconnect(connection);
         }
 
+        return cars;
+    }
+    public static ArrayList<Car> findCarsByManufacturer(Connection connection,String manufacturer) throws DatabaseException {
+        ArrayList<Car> cars = new ArrayList<>();
+        try {
+            PreparedStatement stmnt = connection.prepareStatement(CarQueries.findCarsByManufacturer());
+            stmnt.setString(1,manufacturer);
+            ResultSet rs = stmnt.executeQuery();
+            while (rs.next()) {
+                cars.add(new DbCar(rs));
+            }
+            stmnt.close();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+            throw new DatabaseException();
+        }finally {
+            DbConnPool.disconnect(connection);
+        }
         return cars;
     }
 

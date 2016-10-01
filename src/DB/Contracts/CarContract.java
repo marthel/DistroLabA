@@ -13,4 +13,6 @@ public interface CarContract {
     ArrayList<Car> getAllCars() throws DatabaseException;
     void addManufacturer(String manufacturer)throws DatabaseException;
     void addCarDescription(int carID,String description)throws DatabaseException;
+    ArrayList<Car> findCarsByManufacturer(String manufacturer)throws DatabaseException;
+    Car getCarByModel(String model) throws DatabaseException;
 }

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="BO.Models.Test"%>
+<%@ page import="BO.Test"%>
 <html>
 <head>
     <title>Title</title>
@@ -14,7 +14,7 @@
 <body>
 
 
-<jsp:useBean id="Test" class="BO.Models.Test" />
+<jsp:useBean id="Test" class="BO.Test" />
 <%
     Test test = new Test();
     test.getAllCars();

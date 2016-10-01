@@ -36,6 +36,16 @@ public class DbContainer implements CustomerContract,CarContract,OrderContract {
     public void addCarDescription(int carID,String description) throws DatabaseException {
         DbCar.addCarDescription(getConnection.connect(),carID,description);
     }
+    @Override
+    public ArrayList<Car> findCarsByManufacturer(String manufacturer) throws DatabaseException {
+        return DbCar.findCarsByManufacturer(getConnection.connect(),manufacturer);
+    }
+
+    @Override
+    public Car getCarByModel(String model) throws DatabaseException {
+        return null;
+    }
+
     //----------------------DbUser---------------------
     @Override
     public void addSubscriber(NewSubscriber subscriber) throws DatabaseException{

@@ -1,4 +1,4 @@
-package BO.Models;
+package BO;
 
 import BO.Models.Car;
 import BO.Models.Order;
@@ -21,6 +21,14 @@ public class Test {
 
         DbContainer db = new DbContainer();
 
+        System.out.println("<find cars by manufacturer>");
+        try {
+            ArrayList<Car> cars = db.findCarsByManufacturer("AUDI");
+            System.out.println("<Bring All Cars>");
+        } catch (DatabaseException e) {
+            System.out.println("!Could Not Bring Any Cars!");
+        }
+/*
         System.out.println("<Add New Subscriber>");
         try {
             db.addSubscriber(new NewSubscriber("Abdulla","haha","jagärsämst@alban.com"));
@@ -28,7 +36,7 @@ public class Test {
         } catch (DatabaseException e) {
             System.out.println("!User Already Exist!");
         }
-
+        System.out.println("<get all cars>");
         try {
             ArrayList<Car> cars = db.getAllCars();
             System.out.println("<Bring All Cars>");
@@ -72,5 +80,6 @@ public class Test {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+        */
     }
 }
