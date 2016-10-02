@@ -10,9 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by Marthin on 2016-09-27.
- */
+
 public class DbCar extends Car{
 
     private DbCar(ResultSet rs) throws SQLException {
@@ -28,7 +26,7 @@ public class DbCar extends Car{
             while (rs.next()) {
                 cars.add(new DbCar(rs));
             }
-            if(cars == null) {
+            if(cars.isEmpty()) {
                 throw new DatabaseException("No cars was found.");
             }
             return cars;
@@ -37,6 +35,7 @@ public class DbCar extends Car{
             throw new DatabaseException();
         }finally {
             try {
+                if(stmnt!=null)
                 stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -54,7 +53,7 @@ public class DbCar extends Car{
             while (rs.next()) {
                 cars.add(new DbCar(rs));
             }
-            if(cars == null){
+            if(cars.isEmpty()){
                 throw new DatabaseException("No manufacturer by that name was found.");
             }
             return cars;
@@ -63,6 +62,7 @@ public class DbCar extends Car{
             throw new DatabaseException();
         }finally {
             try {
+                if(stmnt!=null)
                 stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -86,6 +86,7 @@ public class DbCar extends Car{
             throw new DatabaseException();
         }finally {
             try {
+                if(stmnt!=null)
                 stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

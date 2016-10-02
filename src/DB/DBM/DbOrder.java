@@ -42,7 +42,7 @@ public class DbOrder extends Order {
                     orders = addOrderDetail(orders, rs);
                 }
             }
-            if(orders == null) {
+            if(orders.isEmpty()) {
                 throw new DatabaseException("No orders was found.");
             }
             return orders;
@@ -74,7 +74,7 @@ public class DbOrder extends Order {
                     orders = addOrderDetail(orders, rs);
                 }
             }
-            if(orders == null) {
+            if(orders.isEmpty()) {
                 throw new DatabaseException("No orders was found.");
             }
             return orders;

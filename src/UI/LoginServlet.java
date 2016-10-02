@@ -21,7 +21,6 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         RequestDispatcher rd;
-        ServletContext servletContext = getServletContext();
         UiUser user = new UiUser(request.getParameter("username"), request.getParameter("password"));
 
         Authentication auth = null;
