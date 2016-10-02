@@ -1,7 +1,7 @@
 package BO;
 
 import DB.DatabaseException;
-import DB.DbManager;
+import DB.DBManager;
 import UI.Models.UiUser;
 
 import javax.naming.NamingException;
@@ -11,9 +11,9 @@ import java.security.NoSuchAlgorithmException;
 
 public class RegisterUser {
     private UiUser user;
-    private DbManager dbManager;
+    private DBManager dbManager;
     public RegisterUser() throws NamingException {
-        dbManager = new DbManager();
+        dbManager = new DBManager();
     }
     public void register(UiUser user) throws DatabaseException {
         this.user = user;

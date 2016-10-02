@@ -2,7 +2,7 @@ package BO;
 
 import BO.Models.User;
 import DB.DatabaseException;
-import DB.DbManager;
+import DB.DBManager;
 import UI.Models.UiUser;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,10 +13,10 @@ import javax.naming.NamingException;
  */
 public class Authentication {
     private UiUser user;
-    private DbManager dbManager;
+    private DBManager dbManager;
     public Authentication() throws NamingException {
 
-        dbManager = new DbManager();
+        dbManager = new DBManager();
     }
     public UiUser authenticate(UiUser user) throws DatabaseException {
         User usr;

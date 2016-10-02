@@ -16,6 +16,7 @@ public class GetCarsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         CarHandler carHandler = null;
+
         try {
             carHandler = new CarHandler();
         } catch (NamingException e) {

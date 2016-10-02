@@ -14,10 +14,10 @@ import UI.Models.UiUser;
 import javax.naming.NamingException;
 import java.util.ArrayList;
 
-public class DbManager implements UserContract, CarContract, OrderContract {
+public class DBManager implements UserContract, CarContract, OrderContract {
     private DbConnPool getConnection;
 
-    public DbManager() throws NamingException {
+    public DBManager() throws NamingException {
         getConnection = new DbConnPool();
     }
     /************** CAR HANDLING **************/
