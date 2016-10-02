@@ -2,7 +2,7 @@ package BO;
 
 import BO.Models.Car;
 import DB.DatabaseException;
-import DB.DbManager;
+import DB.DBManager;
 import UI.Models.UiCar;
 
 import javax.naming.NamingException;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
  * Created by Marthin on 2016-10-02.
  */
 public class CarHandler {
-    private DbManager dbManager;
+    private DBManager dbManager;
     public CarHandler() throws NamingException {
-        dbManager = new DbManager();
+        dbManager = new DBManager();
     }
 
     public ArrayList<UiCar> findAllCars() throws DatabaseException {

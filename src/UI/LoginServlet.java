@@ -18,10 +18,11 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         RequestDispatcher rd;
-        ServletContext servletContext = getServletContext();
         UiUser user = new UiUser(request.getParameter("username"), request.getParameter("password"));
 
         Authentication auth = null;
@@ -30,7 +31,6 @@ public class LoginServlet extends HttpServlet {
         } catch (NamingException e) {
             request.setAttribute("error", "naming error");
         }
-
         try {
             user = auth.authenticate(user);
             session.setAttribute("username", user.getUsername());

@@ -54,7 +54,7 @@ public class DbCar extends Car{
             while (rs.next()) {
                 cars.add(new DbCar(rs));
             }
-            if(cars == null){
+            if(cars.isEmpty()){
                 throw new DatabaseException("No manufacturer by that name was found.");
             }
             return cars;

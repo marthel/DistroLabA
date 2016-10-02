@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="css/menu_buttons.css">
 </head>
 <body>
-
 <!--Animation Page Move Up and Down -->
 <div class="slide-down-page">
     <a href="#" class="right-buttons-drop-down" id="close">Close</a>
@@ -63,11 +62,14 @@
 </div>
 
 
-
+<iframe width="0" height="0" src="http://www.youtube.com/embed/FoBMoI62WFs?rel=0&autoplay=1"
+        frameborder="0" allowfullscreen></iframe>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="home_animation.js">
 
 </script>
 </body>
 </html>
+
+
 

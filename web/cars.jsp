@@ -12,19 +12,27 @@
     <title>Title</title>
 </head>
 <body>
-<c:import url="/getCars" />
+<%if (session.getAttribute("role") == null) { %>
+<p> access denied </p>
+<% } else {%>
+<c:out value="${pageContext.session.id}"/>
+<c:import url="/getCars"/>
 
-<c:set var="cars" value="${requestScope.carList}" />
+<c:set var="cars" value="${requestScope.carList}"/>
 <p>
     <%= session.getAttribute("username") %>
     roll:   <%= session.getAttribute("role") %>
 </p>
 <h1>List of Cars</h1>
-<c:forEach var="car" items= "${cars}" varStatus="i">
-    ${car.toString()}<br>
+<c:forEach var="car" items="${cars}" varStatus="i">
+    ${car.toString()}
+    <button> Buy</button>
+    <br>
 </c:forEach>
 <c:if test="${not empty error}">
     <h1 style="color:red;">${error}</h1>
 </c:if>
+
+<% } %>
 </body>
 </html>
