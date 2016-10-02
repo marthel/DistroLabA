@@ -6,7 +6,7 @@ package DB.Queries;
 public class OrderQueries {
 
     public static String createOrder() {
-        return "INSERT INTO CARORDER(oDate,sDate,status,userID,firstName,lastName,phone,street)" +
+        return "INSERT INTO CARORDER(oDate,sDate,status,userID,firstName,lastName,phone,address)" +
                 "VALUES(?,?,?,?,?,?,?,?)";
     }
 
