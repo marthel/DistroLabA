@@ -2,8 +2,6 @@ package DB.Contracts;
 
 import BO.Models.Order;
 import DB.DatabaseException;
-import com.sun.org.apache.xpath.internal.operations.Or;
-
 import java.util.ArrayList;
 
 /**
@@ -11,7 +9,8 @@ import java.util.ArrayList;
  */
 public interface OrderContract {
 
-    void createOrder(ArrayList<Order> orders)throws DatabaseException;
-    ArrayList<Order> getOrders()throws DatabaseException;
+    void createOrder()throws DatabaseException;
+    ArrayList<Order> findAllOrders()throws DatabaseException;
+    ArrayList<Order> findOrdersByUsername(String username)throws DatabaseException;
 
 }

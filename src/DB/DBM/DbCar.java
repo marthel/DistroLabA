@@ -4,7 +4,6 @@ import BO.Models.Car;
 import DB.DatabaseException;
 import DB.DbConnPool;
 import DB.Queries.CarQueries;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,72 +19,88 @@ public class DbCar extends Car{
         super(rs.getString("name"),rs.getString("model"),rs.getString("year"),rs.getInt("quantity"),rs.getInt("price"));
     }
 
-    public static ArrayList<Car> getAllCars(Connection connection) throws DatabaseException {
+    public static ArrayList<Car> findAllCars(Connection connection) throws DatabaseException {
         ArrayList<Car> cars = new ArrayList<>();
+        PreparedStatement stmnt = null;
         try {
-            PreparedStatement stmnt = connection.prepareStatement(CarQueries.getAllCars());
+           stmnt = connection.prepareStatement(CarQueries.findAllCars());
             ResultSet rs = stmnt.executeQuery();
             while (rs.next()) {
                 cars.add(new DbCar(rs));
             }
-            stmnt.close();
+            if(cars == null) {
+                throw new DatabaseException("No cars was found.");
+            }
+            return cars;
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
             throw new DatabaseException();
         }finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
             DbConnPool.disconnect(connection);
         }
-
-        return cars;
     }
     public static ArrayList<Car> findCarsByManufacturer(Connection connection,String manufacturer) throws DatabaseException {
         ArrayList<Car> cars = new ArrayList<>();
+        PreparedStatement stmnt = null;
         try {
-            PreparedStatement stmnt = connection.prepareStatement(CarQueries.findCarsByManufacturer());
+            stmnt = connection.prepareStatement(CarQueries.findCarsByManufacturer());
             stmnt.setString(1,manufacturer);
             ResultSet rs = stmnt.executeQuery();
             while (rs.next()) {
                 cars.add(new DbCar(rs));
             }
-            stmnt.close();
+            if(cars == null){
+                throw new DatabaseException("No manufacturer by that name was found.");
+            }
+            return cars;
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
             throw new DatabaseException();
         }finally {
-            DbConnPool.disconnect(connection);
-        }
-        return cars;
-    }
-
-    public static void addManufacturer(Connection connection,String manufacturer)throws DatabaseException{
-
-        try {
-            PreparedStatement stmnt = connection.prepareStatement(CarQueries.admin_AddNewManufacturer());
-            stmnt.setString(1,manufacturer);
-            stmnt.execute();
-            stmnt.close();
-        } catch (SQLException ex){
-            System.out.println(ex.getMessage());
-            throw new DatabaseException("Manufacturer Already Exist");
-        }finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
             DbConnPool.disconnect(connection);
         }
     }
-
-    //TODO make carID and Description as an Object
-    public static void addCarDescription(Connection connection,int carID,String description) throws DatabaseException {
-
+    public static Car findCarByModel(Connection connection, String model) throws DatabaseException {
+        PreparedStatement stmnt = null;
         try {
-            PreparedStatement stmnt = connection.prepareStatement(CarQueries.admin_AddCarDescription());
-            stmnt.setInt(1,carID);
-            stmnt.setString(2,description);
-            stmnt.execute();
-            stmnt.close();
+            stmnt = connection.prepareStatement(CarQueries.findCarByModel());
+            stmnt.setString(1,model);
+            ResultSet rs = stmnt.executeQuery();
+            if(rs.next()) {
+                return new DbCar(rs);
+            } else {
+                throw new DatabaseException("Car model was not found.");
+            }
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
-            throw new DatabaseException("Description Already Exist");
+            throw new DatabaseException();
         }finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
             DbConnPool.disconnect(connection);
         }
+    }
+
+    public static void addCar(Connection connection) throws DatabaseException {
+
+    }
+
+    public static void addCarDescription(Connection connection, int carID, String description) throws DatabaseException {
+    }
+
+    public static void addManufacturer(Connection connection, String manufacturer) throws DatabaseException {
     }
 }

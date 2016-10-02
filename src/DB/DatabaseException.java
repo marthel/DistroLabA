@@ -8,7 +8,9 @@ public class DatabaseException extends Exception{
         super(message);
     }
     public DatabaseException() {
-        super("Database Error");
+        super("Database connectivity error.");
     }
-
+    public String getMessage(){
+        return super.getMessage();
+    }
 }

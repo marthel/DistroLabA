@@ -5,29 +5,23 @@
   Time: 15:45
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
-    <%@include  file="carshopHeader.html" %>
+
+    <title>Login</title>
 </head>
 <body>
-<form method="post" action="login.jsp">
-    <table border="1">
-        <tr>
-            <td>User Name:</td>
-            <td><input type="text" name="uname" value=""
-            /></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type="password" name="pass" value=""
-        <tr>
-            <td><input type="submit" value="Login"
-            /></td>
-        </tr>
-    </table>
-</form>
 
+<form method="post" action="/login">
+    username: <input type="text" name="username"/><br/>
+    password: <input type="password" name="password"/><br/>
+    <input type="submit" value="Login"/>
+</form>
+<c:if test="${not empty message}">
+    <h1>${message}</h1>
+</c:if>
 </body>
 </html>

@@ -1,19 +1,14 @@
 package DB.DBM;
 
-import BO.Models.Car;
 import BO.Models.Order;
 import DB.DatabaseException;
 import DB.DbConnPool;
-import DB.Queries.CarQueries;
 import DB.Queries.OrderQueries;
-import com.sun.org.apache.xpath.internal.operations.Or;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Marthin on 2016-09-27.
@@ -21,64 +16,99 @@ import java.util.Date;
 public class DbOrder extends Order {
 
 
-    private DbOrder(ResultSet rs) throws SQLException{
-        super(rs.getDate("oDate"),rs.getDate("sDate"), rs.getString("status"),
-                rs.getString("firstName"), rs.getString("lastName"),
-                rs.getString("phone"), rs.getString("street"));
+    private DbOrder(ResultSet rs) throws SQLException {
+        super(  rs.getInt("ID"),
+                rs.getDate("oDate"),
+                rs.getDate("sDate"),
+                rs.getString("status"),
+                rs.getString("model") + " " + rs.getString("name") + " " + rs.getInt("price") + " " + rs.getInt("quantity"),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getString("phone"),
+                rs.getString("address"));
     }
 
-    public static void createOrders(Connection connection, ArrayList<Order> orders) throws DatabaseException {
+    public static void createOrder(Connection connection) throws DatabaseException {
+    }
 
-        //Todo Lägg till en transaktion och att hämta user ID innan köp.
-        for (Order o : orders) {
-
-            try {
-                PreparedStatement stmnt = connection.prepareStatement(OrderQueries.createOrder());
-                stmnt.setDate(1, new java.sql.Date(o.getoDate().getTime()));
-                stmnt.setDate(2, new java.sql.Date(o.getsDate().getTime()));
-                stmnt.setString(3, o.getStatus());
-                //Todo fixa så att usrId kan kommas åt. satte den till 5 tmp;
-                stmnt.setInt(4, 5);
-                stmnt.setString(5, o.getFirstName());
-                stmnt.setString(6, o.getLastName());
-                stmnt.setString(7, o.getPhone());
-                stmnt.setString(8, o.getAddress());
-
-                stmnt.execute();
-                stmnt.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                throw new DatabaseException("Could Not Add Order");
-            } finally {
-                DbConnPool.disconnect(connection);
+    public static ArrayList<Order> findAllOrders(Connection connection) throws DatabaseException {
+        PreparedStatement stmnt = null;
+        ArrayList<Order> orders = new ArrayList<>();
+        try {
+            stmnt = connection.prepareStatement(OrderQueries.findAllOrders());
+            ResultSet rs = stmnt.executeQuery();
+            while (rs.next()) {
+                if (!containsOrder(orders, rs)) {
+                    orders.add(new DbOrder(rs));
+                } else {
+                    orders = addOrderDetail(orders, rs);
+                }
             }
+            if(orders == null) {
+                throw new DatabaseException("No orders was found.");
+            }
+            return orders;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new DatabaseException();
+        } finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            DbConnPool.disconnect(connection);
         }
     }
 
-    /**
-     * TODO måste byggas om så att man kan skicka in en user id för att hämta
-     * specefika order.
-     * @param connection
-     * @return
-     * @throws DatabaseException
-     */
-    public static ArrayList<Order> getOrders(Connection connection) throws DatabaseException {
-
+    public static ArrayList<Order> findOrdersByUsername(Connection connection, String username) throws DatabaseException {
         ArrayList<Order> orders = new ArrayList<>();
+        PreparedStatement stmnt = null;
         try {
-            PreparedStatement stmnt = connection.prepareStatement(OrderQueries.getAllOrders());
+            stmnt = connection.prepareStatement(OrderQueries.findOrdersByUsername());
+            stmnt.setString(1, username);
             ResultSet rs = stmnt.executeQuery();
             while (rs.next()) {
-                orders.add(new DbOrder(rs));
+                if (!containsOrder(orders, rs)) {
+                    orders.add(new DbOrder(rs));
+                } else {
+                    orders = addOrderDetail(orders, rs);
+                }
             }
-            stmnt.close();
-        } catch (SQLException ex){
+            if(orders == null) {
+                throw new DatabaseException("No orders was found.");
+            }
+            return orders;
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            throw new DatabaseException();
-        }finally {
+            throw new DatabaseException("User has no orders.");
+        } finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
             DbConnPool.disconnect(connection);
         }
 
+
+    }
+
+    private static boolean containsOrder(ArrayList<Order> orders, ResultSet rs) throws SQLException {
+        for (Order o : orders) {
+            if (o.getID() == rs.getInt("ID")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static ArrayList<Order> addOrderDetail(ArrayList<Order> orders, ResultSet rs) throws SQLException {
+        for (Order o : orders) {
+            if (o.getID() == rs.getInt("ID")) {
+                o.addCarinfo(rs.getString("model") + " " + rs.getString("name") + " " + rs.getInt("price") + " " + rs.getInt("quantity"));
+            }
+        }
         return orders;
     }
 }

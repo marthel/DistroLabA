@@ -1,13 +1,9 @@
 package DB.DBM;
 
-import BO.Models.Car;
 import BO.Models.User;
 import DB.DatabaseException;
 import DB.DbConnPool;
-import DB.Queries.CarQueries;
-import DB.Queries.CustomerQueries;
-import UI.Subscriber;
-
+import DB.Queries.UserQueries;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,56 +20,81 @@ public class DbUser extends User {
                 rs.getString("role"));
     }
 
-    public static void addSubscriber(Connection connection, Subscriber subscriber) throws DatabaseException {
-        System.out.println("DB-USER");
 
-        try {
-            System.out.println("3333333");
-            PreparedStatement stmnt = connection.prepareStatement(CustomerQueries.addSubscriber());
-            System.out.println("444444");
-            stmnt.setString(1,subscriber.getUser_name());
-            System.out.println("555555");
-            stmnt.setString(2,subscriber.getEmail());
-            stmnt.setString(3,subscriber.getPassword());
-            stmnt.execute();
-
-            stmnt.close();
-        } catch (SQLException ex){
-            System.out.println(ex.getMessage());
-            throw new DatabaseException("Could not add user, Already Exist");
-        }finally {
-            DbConnPool.disconnect(connection);
-        }
-
+    public static void addUser(Connection connecttion) throws DatabaseException {
     }
 
-    /**
-     * Checks if the subscriber exists.
-     * Lite fult men den hämtar skiten även om lösen är fel men jämför lösenorden i koden.
-     * while loopen är kanske inte nödvändig eftersom vi bara hämtar en sak.
-     * @param connection
-     * @param subscriber
-     * @throws DatabaseException
-     */
-    public static User getSubscriber(Connection connection, Subscriber subscriber) throws DatabaseException{
-
-        User user = null;
+    public static ArrayList<User> findAlUsers(Connection connection) throws DatabaseException {
+        PreparedStatement stmnt = null;
+        ArrayList<User> users = new ArrayList<>();
         try {
-            PreparedStatement stmnt = connection.prepareStatement(CustomerQueries.getSubscriber());
-            stmnt.setString(1,subscriber.getUser_name());
+            stmnt = connection.prepareStatement(UserQueries.findAllUsers());
             ResultSet rs = stmnt.executeQuery();
             while (rs.next()) {
-                user = new DbUser(rs);
+                users.add(new DbUser(rs));
             }
-            stmnt.close();
+            if(users == null) {
+                throw new DatabaseException("No users was found.");
+            }
+            return users;
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
             throw new DatabaseException();
         }finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
             DbConnPool.disconnect(connection);
         }
-
-        return user;
-
     }
+
+    public static User findUserByUsername(Connection connection, String username) throws DatabaseException {
+        PreparedStatement stmnt = null;
+        try {
+            stmnt = connection.prepareStatement(UserQueries.findUserByUsername());
+            stmnt.setString(1,username);
+            ResultSet rs = stmnt.executeQuery();
+            if(rs.next()) {
+                return new DbUser(rs);
+            } else {
+                throw new DatabaseException("No user by that name was found.");
+            }
+        } catch (SQLException ex){
+            throw new DatabaseException();
+        }finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            DbConnPool.disconnect(connection);
+        }
+    }
+
+    public static User findUserByUsernameAndPassword(Connection connection, String username, String password) throws DatabaseException {
+        PreparedStatement stmnt = null;
+        try {
+            stmnt = connection.prepareStatement(UserQueries.findUserByUsernameAndPassword());
+            stmnt.setString(1,username);
+            stmnt.setString(2,password);
+            ResultSet rs = stmnt.executeQuery();
+            if(rs.next()) {
+                return new DbUser(rs);
+            } else {
+                throw new DatabaseException("Wrong user or password.");
+            }
+        } catch (SQLException ex){
+            throw new DatabaseException();
+        }finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            DbConnPool.disconnect(connection);
+        }
+    }
+
 }

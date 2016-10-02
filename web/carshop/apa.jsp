@@ -17,7 +17,7 @@
 <jsp:useBean id="Test" class="BO.Test" />
 <%
     //Test test = new Test();
-    //test.getAllCars();
+    //test.findAllCars();
 %>
 </body>
 </html>
