@@ -4,6 +4,8 @@ import BO.Models.User;
 import DB.DatabaseException;
 import DB.DbConnPool;
 import DB.Queries.UserQueries;
+import UI.Models.UiUser;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +23,28 @@ public class DbUser extends User {
     }
 
 
-    public static void addUser(Connection connecttion) throws DatabaseException {
+    public static void addUser(Connection connection, UiUser user) throws DatabaseException {
+        PreparedStatement stmnt = null;
+        try {
+            connection.setAutoCommit(false);
+            stmnt = connection.prepareStatement(UserQueries.addUser());
+            stmnt.setString(1,user.getUsername());
+            stmnt.setString(2,user.getEmail());
+            stmnt.setString(3,user.getPassword());
+            stmnt.executeUpdate();
+            connection.commit();
+            connection.setAutoCommit(true);
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+            throw new DatabaseException("Username already taken.");
+        }finally {
+            try {
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            DbConnPool.disconnect(connection);
+        }
     }
 
     public static ArrayList<User> findAlUsers(Connection connection) throws DatabaseException {

@@ -4,27 +4,25 @@ import BO.Models.User;
 import DB.DatabaseException;
 import DB.DbManager;
 import UI.Models.UiUser;
+
+import javax.naming.NamingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import javax.naming.NamingException;
 
 /**
  * Created by Marthin on 2016-10-02.
  */
-public class Authentication {
+public class RegisterUser {
     private UiUser user;
     private DbManager dbManager;
-    public Authentication() throws NamingException {
-
+    public RegisterUser() throws NamingException {
         dbManager = new DbManager();
     }
-    public UiUser authenticate(UiUser user) throws DatabaseException {
-        User usr;
+    public void register(UiUser user) throws DatabaseException {
         this.user = user;
         user.setPassword(digestPassword(user.getPassword()));
         System.out.println(user.getPassword());
-        usr = dbManager.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
-        return new UiUser(usr.getUsername(),usr.getPassword(),usr.getEmail(),usr.getRole());
+        dbManager.addUser(user);
     }
     public String digestPassword(String password) throws DatabaseException{
         MessageDigest messageDigest = null;
@@ -36,4 +34,5 @@ public class Authentication {
         messageDigest.update(password.getBytes());
         return new String(messageDigest.digest());
     }
+
 }

@@ -25,13 +25,13 @@ public class LoginServlet extends HttpServlet {
 
         Authentication auth = null;
         try {
-            auth = new Authentication(user);
+            auth = new Authentication();
         } catch (NamingException e) {
             request.setAttribute("message", "naming error");
         }
 
         try {
-            user = auth.authenticate();
+            user = auth.authenticate(user);
             session.setAttribute("username", user.getUsername());
             session.setAttribute("password", user.getPassword());
             session.setAttribute("role", user.getRole());

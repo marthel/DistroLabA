@@ -17,6 +17,11 @@ public class UiUser {
         this.email = email;
         this.role = role;
     }
+    public UiUser(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
     public UiUser(String username, String password) {
         this.username = username;
         this.password = password;

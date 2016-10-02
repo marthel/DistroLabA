@@ -9,6 +9,7 @@ import DB.Contracts.UserContract;
 import DB.DBM.DbCar;
 import DB.DBM.DbOrder;
 import DB.DBM.DbUser;
+import UI.Models.UiUser;
 
 import javax.naming.NamingException;
 import java.util.ArrayList;
@@ -53,8 +54,8 @@ public class DbManager implements UserContract, CarContract, OrderContract {
 
     /************** USER HANDLING **************/
     @Override
-    public void addUser() throws DatabaseException {
-        DbUser.addUser(getConnection.connect());
+    public void addUser(UiUser user) throws DatabaseException {
+        DbUser.addUser(getConnection.connect(),user);
     }
 
     @Override
