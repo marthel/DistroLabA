@@ -99,11 +99,11 @@ public class UiCar {
 
     @Override
     public String toString() {
-        return  " manufacturer " +
+        return  manufacturer +
                 ", " + model +
-                ", year=" + year +
-                ", quantity=" + quantity +
-                ", price=" + price
+                ", year:" + year +
+                ", quantity:" + quantity +
+                ", price:" + price
                 ;
     }
 }

@@ -23,16 +23,16 @@ public class RegisterServlet extends HttpServlet {
         try {
             regusr = new RegisterUser();
         } catch (NamingException e) {
-            request.setAttribute("message", "naming error");
+            request.setAttribute("error", "naming error");
         }
         try {
             regusr.register(user);
-            rd = request.getRequestDispatcher("carshop/login.jsp");
+            rd = request.getRequestDispatcher("/login.jsp");
             rd.forward(request, response);
         } catch (DatabaseException e) {
-            request.setAttribute("message", e.getMessage());
+            request.setAttribute("error", e.getMessage());
         }
-        rd = request.getRequestDispatcher("carshop/register.jsp");
+        rd = request.getRequestDispatcher("/register.jsp");
         rd.include(request, response);
     }
 }
