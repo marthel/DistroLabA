@@ -55,7 +55,7 @@ public class DbUser extends User {
             while (rs.next()) {
                 users.add(new DbUser(rs));
             }
-            if(users.size()<1) {
+            if(users.isEmpty()) {
                 throw new DatabaseException("No users was found.");
             }
             return users;
