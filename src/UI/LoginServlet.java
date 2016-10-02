@@ -6,6 +6,7 @@ import UI.Models.UiUser;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,14 +21,14 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         RequestDispatcher rd;
-
+        ServletContext servletContext = getServletContext();
         UiUser user = new UiUser(request.getParameter("username"), request.getParameter("password"));
 
         Authentication auth = null;
         try {
             auth = new Authentication();
         } catch (NamingException e) {
-            request.setAttribute("message", "naming error");
+            request.setAttribute("error", "naming error");
         }
 
         try {
@@ -35,15 +36,11 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("password", user.getPassword());
             session.setAttribute("role", user.getRole());
-            request.setAttribute("message", "inloggad som ");
-            request.setAttribute("user", user);
-            rd = request.getRequestDispatcher("/news.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("/cars.jsp");
         } catch (DatabaseException e) {
-            request.setAttribute("message", e.getMessage());
+            request.setAttribute("error", e.getMessage());
         }
         rd = request.getRequestDispatcher("/login.jsp");
-        rd.forward(request, response);
-        //rd.include(request, response);
+        rd.include(request, response);
     }
 }

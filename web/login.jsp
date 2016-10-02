@@ -10,7 +10,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <%@include file="carshopHeader.html" %>
     <title>Login</title>
 </head>
 <body>
@@ -20,8 +19,8 @@
     password: <input type="password" name="password"/><br/>
     <input type="submit" value="Login"/>
 </form>
-<c:if test="${not empty message}">
-    <h1>${message}</h1>
+<c:if test="${not empty error}">
+    <h1 style="color:red;">${error}</h1>
 </c:if>
 </body>
 </html>

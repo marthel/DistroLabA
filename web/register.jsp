@@ -20,8 +20,8 @@
     password: <input type="password" name="password"/><br/>
     <input type="submit" value="register"/>
 </form>
-<c:if test="${not empty message}">
-    <h1>${message}</h1>
+<c:if test="${not empty error}">
+    <h1 style="color:red;">${error}</h1>
 </c:if>
 </body>
 </html>

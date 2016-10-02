@@ -1,5 +1,9 @@
 package UI.Models;
 
+import BO.Models.Car;
+
+import java.util.Arrays;
+
 /**
  * Created by Marthin on 2016-10-02.
  */
@@ -28,6 +32,13 @@ public class UiCar {
         this.manufacturer = manufacturer;
         this.quantity = quantity;
         this.price = price;
+    }
+    public UiCar(Car car) {
+        this.model = car.getModel();
+        this.year = car.getYear();
+        this.manufacturer = car.getManufacturer();
+        this.quantity = car.getQuantity();
+        this.price = car.getPrice();
     }
 
     public String getModel() {
@@ -84,5 +95,15 @@ public class UiCar {
 
     public void setCarImage(byte[] carImage) {
         this.carImage = carImage;
+    }
+
+    @Override
+    public String toString() {
+        return  " manufacturer " +
+                ", " + model +
+                ", year=" + year +
+                ", quantity=" + quantity +
+                ", price=" + price
+                ;
     }
 }

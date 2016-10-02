@@ -22,7 +22,6 @@ public class Authentication {
         User usr;
         this.user = user;
         user.setPassword(digestPassword(user.getPassword()));
-        System.out.println(user.getPassword());
         usr = dbManager.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
         return new UiUser(usr.getUsername(),usr.getPassword(),usr.getEmail(),usr.getRole());
     }

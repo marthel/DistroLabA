@@ -18,32 +18,30 @@
     <a href="#" class="right-buttons-drop-down" id="close">Close</a>
     <div class="text-align-pos">
 
-        <form action="/AuthenticationServlet">
+        <form action="/login" method="post">
         <br>
         <h1 class="text-in-drop-down">
             Username
         </h1>
-        <input name="usr-name" type="text" class="text-box-drop-down" align="center">
+        <input name="username" type="text" class="text-box-drop-down" align="center">
         <br>
         <h1 class="text-in-drop-down">
             Password
         </h1>
         <input name="password" type="password" class="text-box-drop-down" align="center">
         <br>
-        <h1 class="text-in-drop-down">
-            Confirm password
-        </h1>
-        <input name="confirm-password" type="password" class="text-box-drop-down" align="center">
-        <br>
-        <br>
         <br>
         <div class="wrapper">
-            <button class="submit">Submit</button>
+            <input class="submit" type="submit" value="Login"/>
+            <!--<button class="submit">Submit</button>-->
         </div>
         <h1 class="Welcome">
             WELCOME
         </h1>
         </form>
+        <c:if test="${not empty message}">
+            <h1>${message}</h1>
+        </c:if>
     </div>
 </div>
 

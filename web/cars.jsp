@@ -12,16 +12,16 @@
     <title>Title</title>
 </head>
 <body>
-<p>HEJ </p>
-<c:if test="${not empty message}">
-    <p>
-        ${message}
-        <%= session.getAttribute("username") %>
-         roll:   <%= session.getAttribute("role") %>
-    </p>
-</c:if>
-<c:if test="${not empty user}">
-            ${user.getUsername()}
+<c:import url="/getCars" />
+
+<c:set var="cars" value="${requestScope.carList}" />
+
+<h1>List of Cars</h1>
+<c:forEach var="car" items= "${cars}" varStatus="i">
+    ${car.toString()}<br>
+</c:forEach>
+<c:if test="${not empty error}">
+    <h1 style="color:red;">${error}</h1>
 </c:if>
 </body>
 </html>
