@@ -10,9 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by Marthin on 2016-09-27.
- */
 public class DbOrder extends Order {
 
 
@@ -29,6 +26,7 @@ public class DbOrder extends Order {
     }
 
     public static void createOrder(Connection connection) throws DatabaseException {
+        int userID = DbUser.findUserIdbyUsername(connection, "namn");
     }
 
     public static ArrayList<Order> findAllOrders(Connection connection) throws DatabaseException {
@@ -53,7 +51,8 @@ public class DbOrder extends Order {
             throw new DatabaseException();
         } finally {
             try {
-                stmnt.close();
+                if(stmnt!=null)
+                    stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -84,7 +83,8 @@ public class DbOrder extends Order {
             throw new DatabaseException("User has no orders.");
         } finally {
             try {
-                stmnt.close();
+                if(stmnt!=null)
+                    stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

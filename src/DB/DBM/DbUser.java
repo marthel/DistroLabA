@@ -12,9 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by Marthin on 2016-09-27.
- */
+
 public class DbUser extends User {
 
     private DbUser(ResultSet rs) throws SQLException {
@@ -39,7 +37,8 @@ public class DbUser extends User {
             throw new DatabaseException("Username already taken.");
         }finally {
             try {
-                stmnt.close();
+                if(stmnt!=null)
+                    stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -56,7 +55,7 @@ public class DbUser extends User {
             while (rs.next()) {
                 users.add(new DbUser(rs));
             }
-            if(users == null) {
+            if(users.size()<1) {
                 throw new DatabaseException("No users was found.");
             }
             return users;
@@ -65,7 +64,8 @@ public class DbUser extends User {
             throw new DatabaseException();
         }finally {
             try {
-                stmnt.close();
+                if(stmnt!=null)
+                    stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -88,14 +88,37 @@ public class DbUser extends User {
             throw new DatabaseException();
         }finally {
             try {
-                stmnt.close();
+                if(stmnt!=null)
+                    stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
             DbConnPool.disconnect(connection);
         }
     }
-
+    public static int findUserIdbyUsername(Connection connection, String username) throws DatabaseException {
+        PreparedStatement stmnt = null;
+        try {
+            stmnt = connection.prepareStatement(UserQueries.findUserIdbyUsername());
+            stmnt.setString(1,username);
+            ResultSet rs = stmnt.executeQuery();
+            if(rs.next()) {
+                return rs.getInt("ID");
+            } else {
+                throw new DatabaseException("Could not find user.");
+            }
+        } catch (SQLException ex){
+            throw new DatabaseException();
+        }finally {
+            try {
+                if(stmnt!=null)
+                    stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            DbConnPool.disconnect(connection);
+        }
+    }
     public static User findUserByUsernameAndPassword(Connection connection, String username, String password) throws DatabaseException {
         PreparedStatement stmnt = null;
         try {
@@ -112,7 +135,8 @@ public class DbUser extends User {
             throw new DatabaseException();
         }finally {
             try {
-                stmnt.close();
+                if(stmnt!=null)
+                    stmnt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

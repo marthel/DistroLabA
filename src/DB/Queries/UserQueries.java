@@ -1,8 +1,5 @@
 package DB.Queries;
 
-/**
- * Created by Marthin on 2016-09-27.
- */
 public class UserQueries {
 
 
@@ -36,5 +33,12 @@ public class UserQueries {
                 + "FROM USER "
                 + "WHERE USER.username = ? "
                 + "AND USER.password = ?;";
+    }
+
+    public static String findUserIdbyUsername() {
+        return "SELECT "
+                + "USER.ID as ID "
+                + "FROM USER "
+                + "WHERE USER.username = ? ";
     }
 }

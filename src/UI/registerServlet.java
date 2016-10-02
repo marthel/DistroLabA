@@ -1,6 +1,5 @@
 package UI;
 
-import BO.Authentication;
 import BO.RegisterUser;
 import DB.DatabaseException;
 import UI.Models.UiUser;
@@ -12,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
