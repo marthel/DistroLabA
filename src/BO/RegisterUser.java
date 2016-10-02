@@ -9,9 +9,7 @@ import javax.naming.NamingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by Marthin on 2016-10-02.
- */
+
 public class RegisterUser {
     private UiUser user;
     private DbManager dbManager;
@@ -21,11 +19,10 @@ public class RegisterUser {
     public void register(UiUser user) throws DatabaseException {
         this.user = user;
         user.setPassword(digestPassword(user.getPassword()));
-        System.out.println(user.getPassword());
         dbManager.addUser(user);
     }
-    public String digestPassword(String password) throws DatabaseException{
-        MessageDigest messageDigest = null;
+    private String digestPassword(String password) throws DatabaseException{
+        MessageDigest messageDigest;
         try {
             messageDigest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
