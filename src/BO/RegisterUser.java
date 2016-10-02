@@ -1,6 +1,5 @@
 package BO;
 
-import BO.Models.User;
 import DB.DatabaseException;
 import DB.DbManager;
 import UI.Models.UiUser;
