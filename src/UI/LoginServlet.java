@@ -37,12 +37,13 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("role", user.getRole());
             request.setAttribute("message", "inloggad som ");
             request.setAttribute("user", user);
-            rd = request.getRequestDispatcher("carshop/news.jsp");
+            rd = request.getRequestDispatcher("/news.jsp");
             rd.forward(request, response);
         } catch (DatabaseException e) {
             request.setAttribute("message", e.getMessage());
         }
-        rd = request.getRequestDispatcher("carshop/login.jsp");
-        rd.include(request, response);
+        rd = request.getRequestDispatcher("/login.jsp");
+        rd.forward(request, response);
+        //rd.include(request, response);
     }
 }
