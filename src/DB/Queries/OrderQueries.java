@@ -6,8 +6,13 @@ package DB.Queries;
 public class OrderQueries {
 
     public static String createOrder() {
-        return "INSERT INTO CARORDER(oDate,sDate,status,userID,firstName,lastName,phone,address)" +
-                "VALUES(?,?,?,?,?,?,?,?)";
+        return "INSERT INTO CARORDER(oDate,userID,firstName,lastName,phone,address)" +
+                "VALUES(?,?,?,?,?,?)";
+    }
+
+    public static String createOrderDetails() {
+        return "INSERT INTO ORDERDETAIL(orderID,carID,quantity)" +
+                "VALUES(?,?,?)";
     }
 
     public static String findAllOrders() {

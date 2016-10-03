@@ -11,20 +11,29 @@ public class UiOrder {
     private Date oDate;
     private Date sDate;
     private String status;
-    private ArrayList<String> carInfo;
+    private ArrayList<UiCar> cars;
     private String firstName;
     private String lastName;
     private String phone;
     private String address;
-
+    private String username;
     public UiOrder() {}
 
-    public UiOrder(int ID, Date oDate, Date sDate, String status, String carInfo, String firstName, String lastName, String phone, String address) {
+    public UiOrder(int ID, Date oDate, Date sDate, String status, ArrayList<UiCar> cars, String firstName, String lastName, String phone, String address) {
         this.ID = ID;
         this.oDate = oDate;
         this.sDate = sDate;
         this.status = status;
-        this.carInfo.add(carInfo);
+        this.cars = cars;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.address = address;
+    }
+    public UiOrder(Date oDate, ArrayList<UiCar> cars, String firstName, String lastName, String phone, String address, String username) {
+        this.username = username;
+        this.oDate = oDate;
+        this.cars = cars;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -63,12 +72,12 @@ public class UiOrder {
         this.status = status;
     }
 
-    public ArrayList<String> getCarInfo() {
-        return carInfo;
+    public ArrayList<UiCar> getCars() {
+        return cars;
     }
 
-    public void setCarInfo(ArrayList<String> carInfo) {
-        this.carInfo = carInfo;
+    public void setCars(ArrayList<UiCar> cars) {
+        this.cars = cars;
     }
 
     public String getFirstName() {
@@ -102,7 +111,8 @@ public class UiOrder {
     public void setAddress(String address) {
         this.address = address;
     }
-    public void addCarinfo(String carInfo) {
-        this.carInfo.add(carInfo);
+    public void addCar(UiCar car) {
+        this.cars.add(car);
     }
+    public String getUsername() { return this.username; }
 }

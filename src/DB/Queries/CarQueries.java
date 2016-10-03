@@ -56,6 +56,20 @@ public class CarQueries {
     }
 
 
+    public static String findCarIDByModel() {
+        return "SELECT "
+                + "CAR.ID as ID "
+                + "FROM CAR "
+                + "WHERE CAR.model = ?;";
+    }
+    public static String getCarQuantityDByCarID() {
+        return "SELECT "
+                + "CAR.quantity as quantity "
+                + "FROM CAR "
+                + "WHERE CAR.ID = ?;";
+    }
 
-
+    public static String updateQuantity() {
+        return "UPDATE CAR SET quantity=? WHERE CAR.ID = ?;";
+    }
 }

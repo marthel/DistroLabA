@@ -24,14 +24,11 @@ public class DbUser extends User {
     public static void addUser(Connection connection, UiUser user) throws DatabaseException {
         PreparedStatement stmnt = null;
         try {
-            connection.setAutoCommit(false);
             stmnt = connection.prepareStatement(UserQueries.addUser());
             stmnt.setString(1,user.getUsername());
             stmnt.setString(2,user.getEmail());
             stmnt.setString(3,user.getPassword());
             stmnt.executeUpdate();
-            connection.commit();
-            connection.setAutoCommit(true);
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
             throw new DatabaseException("Username already taken.");
@@ -93,7 +90,7 @@ public class DbUser extends User {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            DbConnPool.disconnect(connection);
+            //DbConnPool.disconnect(connection);
         }
     }
     public static int findUserIdbyUsername(Connection connection, String username) throws DatabaseException {
@@ -116,7 +113,7 @@ public class DbUser extends User {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            DbConnPool.disconnect(connection);
+            //DbConnPool.disconnect(connection);
         }
     }
     public static User findUserByUsernameAndPassword(Connection connection, String username, String password) throws DatabaseException {

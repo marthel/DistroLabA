@@ -2,6 +2,8 @@ package DB.Contracts;
 
 import BO.Models.Car;
 import DB.DatabaseException;
+
+import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
@@ -14,4 +16,6 @@ public interface CarContract {
     void addCar()throws DatabaseException;
     ArrayList<Car> findCarsByManufacturer(String manufacturer)throws DatabaseException;
     Car findCarByModel(String model) throws DatabaseException;
+    Integer findCarIDByModel(Connection connection, String model) throws DatabaseException;
+    public void updateCarQuantity(Connection connection, int carID, int quantity) throws DatabaseException;
 }

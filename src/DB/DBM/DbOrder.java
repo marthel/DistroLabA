@@ -1,13 +1,13 @@
 package DB.DBM;
 
 import BO.Models.Order;
+import BO.Models.OrderDetail;
 import DB.DatabaseException;
 import DB.DbConnPool;
 import DB.Queries.OrderQueries;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import UI.Models.UiOrder;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DbOrder extends Order {
@@ -25,8 +25,44 @@ public class DbOrder extends Order {
                 rs.getString("address"));
     }
 
-    public static void createOrder(Connection connection) throws DatabaseException {
-        int userID = DbUser.findUserIdbyUsername(connection, "namn");
+    public static void createOrder(Connection connection, UiOrder order, int userID, ArrayList<OrderDetail> orderDetails) throws DatabaseException {
+        PreparedStatement stmnt = null;
+        int orderID =0;
+        try {
+
+            //adds the order to CARODER table
+            stmnt = connection.prepareStatement(OrderQueries.createOrder(), Statement.RETURN_GENERATED_KEYS);
+            stmnt.setDate(1,order.getoDate());
+            stmnt.setInt(2,userID);
+            stmnt.setString(3, order.getFirstName());
+            stmnt.setString(4, order.getLastName());
+            stmnt.setString(5, order.getPhone());
+            stmnt.setString(6, order.getAddress());
+            stmnt.executeUpdate();
+            ResultSet rs = stmnt.getGeneratedKeys();
+            if(rs.next()){
+                orderID = rs.getInt(1);
+            }
+            //adds details to ORDERDETAILS table
+            for (OrderDetail od: orderDetails) {
+                stmnt = connection.prepareStatement(OrderQueries.createOrderDetails());
+                stmnt.setInt(1,orderID);
+                stmnt.setInt(2,od.getCarID());
+                stmnt.setInt(3,od.getQuantity());
+                stmnt.executeUpdate();
+            }
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+            throw new DatabaseException("Username already taken.");
+        }finally {
+            try {
+                if(stmnt!=null)
+                    stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
     }
 
     public static ArrayList<Order> findAllOrders(Connection connection) throws DatabaseException {

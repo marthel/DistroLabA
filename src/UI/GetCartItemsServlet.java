@@ -24,9 +24,8 @@ public class GetCartItemsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         CarHandler carHandler = null;
-        RequestDispatcher rd;
         HttpSession session = request.getSession();
-        ArrayList<UiCar> uiCar = new ArrayList<>();
+        ArrayList<UiCar> cars = new ArrayList<>();
 
 
 
@@ -37,15 +36,15 @@ public class GetCartItemsServlet extends HttpServlet {
 
         try {
             carHandler = new CarHandler();
-            uiCar = carHandler.getCartItems((ArrayList<String>) session.getAttribute("cartItems"));
+            cars = carHandler.getCartItems((ArrayList<String>) session.getAttribute("cartItems"));
         } catch (NamingException e) {
             request.setAttribute("error","naming error");
         } catch (DatabaseException e) {
             request.setAttribute("error",e.getMessage());
         }
 
-
-        request.setAttribute("seeItems",uiCar);
+        request.setAttribute("cItems",cars);
+        session.setAttribute("sCars",cars);
         request.getRequestDispatcher("/cart.jsp").include(request,response);
 
 
