@@ -31,30 +31,31 @@ public class CreateOrderServlet extends HttpServlet {
         HttpSession session = request.getSession();
         OrderHandler orderHandler = null;
         UiOrder order;
+        if(session.getAttribute("role")!=null) {
+            ArrayList<UiCar> cars = (ArrayList<UiCar>) session.getAttribute("sCars");
+            request.getSession().removeAttribute("sCars");
 
-        ArrayList<UiCar> cars = (ArrayList<UiCar>) session.getAttribute("sCars");
-        request.getSession().removeAttribute("sCars");
+            String username = (String) session.getAttribute("username");
+            Calendar calendar = Calendar.getInstance();
+            Date oDate = new Date(calendar.getTime().getTime());
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            order = new UiOrder(oDate, cars, firstName, lastName, phone, address, username);
 
-        String username = (String) session.getAttribute("username");
-        Calendar calendar = Calendar.getInstance();
-        Date oDate = new Date(calendar.getTime().getTime());
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        order = new UiOrder(oDate, cars, firstName,lastName,phone,address,username);
+            try {
+                orderHandler = new OrderHandler();
+            } catch (NamingException e) {
+                request.setAttribute("error", "naming error");
+            }
 
-        try {
-            orderHandler = new OrderHandler();
-        } catch (NamingException e) {
-            request.setAttribute("error", "naming error");
-        }
-
-        try {
-            orderHandler.createOrder(order);
-            session.removeAttribute("cartItems");
-        } catch (DatabaseException e) {
-            request.setAttribute("error", e.getMessage());
+            try {
+                orderHandler.createOrder(order);
+                session.removeAttribute("cartItems");
+            } catch (DatabaseException e) {
+                request.setAttribute("error", e.getMessage());
+            }
         }
     }
 }

@@ -19,16 +19,17 @@ public class AddToCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
-
-        ArrayList<String> cartItems = new ArrayList<>();
-        if(session.getAttribute("cartItems") == null) {
-            cartItems.add(request.getParameter("cartItem"));
-            session.setAttribute("cartItems",cartItems);
-        } else {
-            cartItems = (ArrayList<String>) session.getAttribute("cartItems");
-            cartItems.add(request.getParameter("cartItem"));
-            session.setAttribute("cartItems",cartItems);
+        if(session.getAttribute("role")!=null) {
+            ArrayList<String> cartItems = new ArrayList<>();
+            if (session.getAttribute("cartItems") == null) {
+                cartItems.add(request.getParameter("cartItem"));
+                session.setAttribute("cartItems", cartItems);
+            } else {
+                cartItems = (ArrayList<String>) session.getAttribute("cartItems");
+                cartItems.add(request.getParameter("cartItem"));
+                session.setAttribute("cartItems", cartItems);
+            }
+            response.sendRedirect("/cars.jsp");
         }
-        response.sendRedirect("/cars.jsp");
     }
 }

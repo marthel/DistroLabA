@@ -27,26 +27,26 @@ public class GetCartItemsServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ArrayList<UiCar> cars = new ArrayList<>();
 
+        if(session.getAttribute("role")!=null) {
 
+            if (session.getAttribute("cartItems") == null) {
+                request.setAttribute("error", "No Items in Cart");
+                request.getRequestDispatcher("/cart.jsp").include(request, response);
+            }
 
-        if (session.getAttribute("cartItems") == null){
-            request.setAttribute("error","No Items in Cart");
-            request.getRequestDispatcher("/cart.jsp").include(request,response);
+            try {
+                carHandler = new CarHandler();
+                cars = carHandler.getCartItems((ArrayList<String>) session.getAttribute("cartItems"));
+            } catch (NamingException e) {
+                request.setAttribute("error", "naming error");
+            } catch (DatabaseException e) {
+                request.setAttribute("error", e.getMessage());
+            }
+
+            request.setAttribute("cItems", cars);
+            session.setAttribute("sCars", cars);
+            request.getRequestDispatcher("/cart.jsp").include(request, response);
         }
-
-        try {
-            carHandler = new CarHandler();
-            cars = carHandler.getCartItems((ArrayList<String>) session.getAttribute("cartItems"));
-        } catch (NamingException e) {
-            request.setAttribute("error","naming error");
-        } catch (DatabaseException e) {
-            request.setAttribute("error",e.getMessage());
-        }
-
-        request.setAttribute("cItems",cars);
-        session.setAttribute("sCars",cars);
-        request.getRequestDispatcher("/cart.jsp").include(request,response);
-
 
     }
 }
