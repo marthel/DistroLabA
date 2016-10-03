@@ -11,6 +11,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="css/menu_buttons.css">
+
 </head>
 <body>
 <!--Animation Page Move Up and Down -->
@@ -46,8 +47,6 @@
 </div>
 
 
-
-
 <div class="content">
     <!--Menu Bar-->
 
@@ -58,6 +57,11 @@
             Video Not Supported By Your Browser.
         </video>
         <img src="http://pictures.topspeed.com/IMG/crop/201211/2014-mercedes-sls-amg-bla-19_1600x0w.jpg"/>
+        <div>
+            <button class="facebook-twitter-instagram"></button>
+            <button class="facebook-twitter-instagram"></button>
+            <button class="facebook-twitter-instagram"></button>
+        </div>
     </div>
 
 </div>

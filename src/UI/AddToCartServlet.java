@@ -1,10 +1,6 @@
 package UI;
 
-import BO.Authentication;
-import DB.DatabaseException;
-import UI.Models.UiUser;
 
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +19,7 @@ public class AddToCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
-        RequestDispatcher rd;
+
         ArrayList<String> cartItems = new ArrayList<>();
         if(session.getAttribute("cartItems") == null) {
             cartItems.add(request.getParameter("cartItem"));
