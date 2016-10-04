@@ -25,25 +25,26 @@ public class AddCarServlet extends HttpServlet{
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
+        HttpSession session = request.getSession();
 
-        if (request.getParameter("add_year").isEmpty() || request.getParameter("add_quantity").isEmpty() ||
-                request.getParameter("add_price").isEmpty() || request.getParameter("add_price").isEmpty()){
-            response.sendRedirect("/cars.jsp");
+        if(session.getAttribute("role").equals("admin")) {
+            if (request.getParameter("add_year").isEmpty() || request.getParameter("add_quantity").isEmpty() ||
+                    request.getParameter("add_price").isEmpty() || request.getParameter("add_price").isEmpty()) {
+                response.sendRedirect("/cars.jsp");
+            }
+
+            try {
+                CarHandler ch = new CarHandler();
+
+                ch.addCar(new UiCar(request.getParameter("add_manufacturer").toUpperCase(), request.getParameter("add_carModel"),
+                        request.getParameter("add_year"), Integer.parseInt(request.getParameter("add_quantity")),
+                        Integer.parseInt(request.getParameter("add_price"))));
+                response.sendRedirect("/cars.jsp");
+            } catch (NamingException e) {
+                e.printStackTrace();
+            } catch (DatabaseException e) {
+                e.printStackTrace();
+            }
         }
-
-        try {
-            CarHandler ch = new CarHandler();
-
-            ch.addCar(new UiCar(request.getParameter("add_manufacturer").toUpperCase(),request.getParameter("add_carModel"),
-                    request.getParameter("add_year"),Integer.parseInt(request.getParameter("add_quantity")),
-                    Integer.parseInt(request.getParameter("add_price"))));
-            response.sendRedirect("/cars.jsp");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        } catch (DatabaseException e) {
-            e.printStackTrace();
-        }
-
-
     }
 }

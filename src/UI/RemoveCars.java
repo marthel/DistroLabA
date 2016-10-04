@@ -20,20 +20,21 @@ import java.util.ArrayList;
 public class RemoveCars extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        try {
-            CarHandler carHandler = new CarHandler();
-            carHandler.removeCar(request.getParameter("carModel"));
+        HttpSession session = request.getSession();
 
-        } catch (NamingException e) {
-            request.setAttribute("error", "Already removed");
-        } catch (DatabaseException e) {
-            request.setAttribute("error",e.getMessage());
+        if(session.getAttribute("role").equals("admin")) {
+            try {
+                CarHandler carHandler = new CarHandler();
+                carHandler.removeCar(request.getParameter("carModel"));
+
+            } catch (NamingException e) {
+                request.setAttribute("error", "Already removed");
+            } catch (DatabaseException e) {
+                request.setAttribute("error", e.getMessage());
+            }
+
+            response.sendRedirect("/cars.jsp");
+
         }
-
-        response.sendRedirect("/cars.jsp");
-
-
-
-
     }
 }

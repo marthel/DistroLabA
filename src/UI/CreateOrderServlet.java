@@ -53,6 +53,7 @@ public class CreateOrderServlet extends HttpServlet {
             try {
                 orderHandler.createOrder(order);
                 session.removeAttribute("cartItems");
+                response.sendRedirect("/cars.jsp");
             } catch (DatabaseException e) {
                 request.setAttribute("error", e.getMessage());
             }
