@@ -10,6 +10,7 @@ import DB.Contracts.UserContract;
 import DB.DBM.DbCar;
 import DB.DBM.DbOrder;
 import DB.DBM.DbUser;
+import UI.Models.UiCar;
 import UI.Models.UiOrder;
 import UI.Models.UiUser;
 
@@ -31,8 +32,23 @@ public class DBManager implements UserContract, CarContract, OrderContract {
     }
 
     @Override
-    public void addCar() throws DatabaseException {
-        DbCar.addCar(connPool.connect());
+    public void addCar(UiCar car,int id) throws DatabaseException {
+        DbCar.addCar(connPool.connect(),car,id);
+    }
+
+    @Override
+    public void addCarFromPrevAddedManu(UiCar car) throws DatabaseException {
+        DbCar.addCarFromPrevAddedManu(connPool.connect(),car);
+    }
+
+    @Override
+    public void removeCar(String model) throws DatabaseException {
+        DbCar.removeCar(connPool.connect(),model);
+    }
+
+    @Override
+    public void updateCar(UiCar car) throws DatabaseException {
+        DbCar.updateCar(connPool.connect(),car);
     }
 
     @Override
@@ -54,6 +70,11 @@ public class DBManager implements UserContract, CarContract, OrderContract {
     @Override
     public Car findCarByModel(String model) throws DatabaseException {
         return DbCar.findCarByModel(connPool.connect(), model);
+    }
+
+    @Override
+    public int getManufacturerID(String manufacturer) throws DatabaseException {
+        return DbCar.getManufacturerID(connPool.connect(),manufacturer);
     }
 
     /************** USER HANDLING **************/

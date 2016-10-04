@@ -43,8 +43,8 @@ public class CarQueries {
 
     //----------------------INSERTION----------------------\\
     public static String addNCar() {
-        return "INSERT INTO CAR(model,year,quantity,price)" +
-                "VALUES(?,?,?,?)";
+        return "INSERT INTO CAR(model,year,manufacturerID,quantity,price)" +
+                "VALUES(?,?,?,?,?)";
     }
     public static String addManufacturer(){
         return "INSERT INTO MANUFACTURER(name)" +
@@ -55,7 +55,11 @@ public class CarQueries {
                 "VALUES(?,?)";
     }
 
+    //-----------------------Remove--------------------------\\
 
+    public static String removeCar(){
+        return "DELETE FROM CAR WHERE CAR.model = ?";
+    }
     public static String findCarIDByModel() {
         return "SELECT "
                 + "CAR.ID as ID "
@@ -69,6 +73,30 @@ public class CarQueries {
                 + "WHERE CAR.ID = ?;";
     }
 
+    public static String updateCar(){
+        return "UPDATE CAR SET model = ?, year = ?, quantity = ?, price = ? WHERE CAR.model = ?";
+    }
+
+    public static String addCarFromPrevAddedManu(){
+        return "INSERT INTO CAR SET " +
+                "CAR.model = ?," +
+                "CAR.year = ?," +
+                "CAR.manufacturerID = (SELECT LAST_INSERT_ID())," +
+                "CAR.quantity = ?," +
+                "CAR.price = ?;";
+
+    }
+
+
+
+
+
+    public static String getManufacturer() {
+        return "SELECT "
+                + "MANUFACTURER.ID "
+                + "FROM MANUFACTURER "
+                + "WHERE MANUFACTURER.name = ?";
+    }
     public static String updateQuantity() {
         return "UPDATE CAR SET quantity=? WHERE CAR.ID = ?;";
     }

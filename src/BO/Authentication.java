@@ -25,6 +25,7 @@ public class Authentication {
         usr = dbManager.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
         return new UiUser(usr.getUsername(),usr.getPassword(),usr.getEmail(),usr.getRole());
     }
+
     public String digestPassword(String password) throws DatabaseException{
         MessageDigest messageDigest = null;
         try {

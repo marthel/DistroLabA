@@ -16,6 +16,9 @@ public class UiCar {
     private String description;
     private byte[] carImage;
 
+
+    private String oldCar;
+
     public  UiCar() {}
 
     public UiCar(String model, String year, String manufacturer, int quantity, String description, byte[] carImage) {
@@ -32,6 +35,14 @@ public class UiCar {
         this.manufacturer = manufacturer;
         this.quantity = quantity;
         this.price = price;
+    }
+    public UiCar(String manufacturer, String model, String year, int quantity, int price,String oldCar) {
+        this.model = model;
+        this.year = year;
+        this.manufacturer = manufacturer;
+        this.quantity = quantity;
+        this.price = price;
+        this.oldCar = oldCar;
     }
     public UiCar(Car car) {
         this.model = car.getModel();
@@ -95,6 +106,10 @@ public class UiCar {
 
     public void setCarImage(byte[] carImage) {
         this.carImage = carImage;
+    }
+
+    public String getOldCar() {
+        return oldCar;
     }
 
     @Override

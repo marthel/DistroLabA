@@ -40,6 +40,26 @@ public class CarHandler {
         }
         return cars;
     }
+
+    public void removeCar(String model)throws DatabaseException{
+        dbManager.removeCar(model);
+    }
+
+    public void updateCar(UiCar car) throws DatabaseException{
+        dbManager.updateCar(car);
+    }
+
+    public void addCar(UiCar car) throws DatabaseException {
+
+        try {
+            int id = dbManager.getManufacturerID(car.getManufacturer());
+            dbManager.addCar(car,id);
+        } catch (DatabaseException e) {
+            dbManager.addManufacturer(car.getManufacturer());
+            dbManager.addCarFromPrevAddedManu(car);
+            //e.printStackTrace();
+        }
+    }
     public ArrayList<Integer> getCarIDs(Connection connection, ArrayList<UiCar> cars) throws DatabaseException {
         ArrayList<Integer> carIDs = new ArrayList<>();
 
