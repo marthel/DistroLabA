@@ -27,7 +27,7 @@ public class RegisterServlet extends HttpServlet {
         }
         try {
             regusr.register(user);
-            rd = request.getRequestDispatcher("/login.jsp");
+            rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         } catch (DatabaseException e) {
             request.setAttribute("error", e.getMessage());
