@@ -17,4 +17,5 @@ public interface OrderContract {
     ArrayList<Order> findAllOrders()throws DatabaseException;
     ArrayList<Order> findOrdersByUsername(String username)throws DatabaseException;
 
+    void sendOrder(UiOrder order) throws DatabaseException;
 }

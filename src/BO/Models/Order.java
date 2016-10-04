@@ -12,7 +12,7 @@ public class Order {
     private Date oDate;
     private Date sDate;
     private String status;
-    private ArrayList<String> carInfo;
+    private ArrayList<String> carInfo = new ArrayList<>();
     private String firstName;
     private String lastName;
     private String phone;
@@ -68,5 +68,18 @@ public class Order {
 
     public String getAddress() {
         return address;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + ID +
+                ", order date: " + oDate +
+                ", shipped date: " + sDate +
+                ", status: " + status +
+                ", first name:" + firstName +
+                ", last name: " + lastName +
+                ", phone: " + phone +
+                ", address: " + address + "}   " +
+                "Order details: " + carInfo;
     }
 }

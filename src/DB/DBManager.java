@@ -93,6 +93,11 @@ public class DBManager implements UserContract, CarContract, OrderContract {
         return DbOrder.findOrdersByUsername(connPool.connect(),username);
     }
 
+    @Override
+    public void sendOrder(UiOrder order) throws DatabaseException {
+        DbOrder.sendOrder(connPool.connect(), order);
+    }
+
     public Connection getConnection() {
         return connPool.connect();
     }

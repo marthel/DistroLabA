@@ -39,6 +39,11 @@ public class UiOrder {
         this.phone = phone;
         this.address = address;
     }
+    public UiOrder(int ID, Date sDate, String status) {
+        this.ID = ID;
+        this.sDate = sDate;
+        this.status = status;
+    }
 
     public int getID() {
         return ID;

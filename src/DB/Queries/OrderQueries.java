@@ -6,8 +6,8 @@ package DB.Queries;
 public class OrderQueries {
 
     public static String createOrder() {
-        return "INSERT INTO CARORDER(oDate,userID,firstName,lastName,phone,address)" +
-                "VALUES(?,?,?,?,?,?)";
+        return "INSERT INTO CARORDER(oDate,status,userID,firstName,lastName,phone,address)" +
+                "VALUES(?,'inte skickad',?,?,?,?,?)";
     }
 
     public static String createOrderDetails() {
@@ -22,7 +22,6 @@ public class OrderQueries {
                 + "CARORDER.lastName as lastName, "
                 + "CARORDER.phone as phone, "
                 + "CARORDER.address as address, "
-                + "CARORDER.street as street, "
                 + "CARORDER.oDate as oDate, "
                 + "CARORDER.sDate as sDate, "
                 + "CARORDER.status as status, "
@@ -47,7 +46,6 @@ public class OrderQueries {
                 + "CARORDER.lastName as lastName, "
                 + "CARORDER.phone as phone, "
                 + "CARORDER.address as address, "
-                + "CARORDER.street as street, "
                 + "CARORDER.oDate as oDate, "
                 + "CARORDER.sDate as sDate, "
                 + "CARORDER.status as status, "
@@ -65,5 +63,8 @@ public class OrderQueries {
                 + "MANUFACTURER.ID = CAR.manufacturerID "
                 + "AND "
                 + "USER.username = ?;";
+    }
+    public static String sendOrder() {
+        return "UPDATE CARORDER SET sDate=?, status=? WHERE CARORDER.ID = ?;";
     }
 }

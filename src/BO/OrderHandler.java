@@ -1,5 +1,6 @@
 package BO;
 
+import BO.Models.Order;
 import BO.Models.OrderDetail;
 import DB.DBM.DbOrder;
 import DB.DBM.DbUser;
@@ -69,5 +70,12 @@ public class OrderHandler {
             }
         }
         return false;
+    }
+    public ArrayList<Order> findAllOrders() throws DatabaseException{
+        return dbManager.findAllOrders();
+    }
+
+    public void sendOrder(UiOrder order) throws DatabaseException{
+        dbManager.sendOrder(order);
     }
 }

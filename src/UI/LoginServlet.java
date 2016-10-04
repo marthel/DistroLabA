@@ -35,7 +35,12 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("password", user.getPassword());
             session.setAttribute("role", user.getRole());
-            response.sendRedirect("/cars.jsp");
+            if(user.getRole().equals("employee")){
+                response.sendRedirect("/orders.jsp");
+            } else {
+                response.sendRedirect("/cars.jsp");
+            }
+
         } catch (DatabaseException e) {
             request.setAttribute("error", e.getMessage());
         }

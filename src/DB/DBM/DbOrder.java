@@ -14,15 +14,17 @@ public class DbOrder extends Order {
 
 
     private DbOrder(ResultSet rs) throws SQLException {
+        //super(rs.getInt("ID"),rs.getDate("oDate"),rs.getDate("sDate"),rs.getString("status"),rs.getString("model"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("phone"),rs.getString("address"));
         super(  rs.getInt("ID"),
                 rs.getDate("oDate"),
                 rs.getDate("sDate"),
                 rs.getString("status"),
-                rs.getString("model") + " " + rs.getString("name") + " " + rs.getInt("price") + " " + rs.getInt("quantity"),
+                rs.getString("name") + " model: " + rs.getString("model") + ", price: " + rs.getInt("price") + ", quantity: " + rs.getInt("quantity"),
                 rs.getString("firstName"),
                 rs.getString("lastName"),
                 rs.getString("phone"),
                 rs.getString("address"));
+
     }
 
     public static void createOrder(Connection connection, UiOrder order, int userID, ArrayList<OrderDetail> orderDetails) throws DatabaseException {
@@ -104,11 +106,7 @@ public class DbOrder extends Order {
             stmnt.setString(1, username);
             ResultSet rs = stmnt.executeQuery();
             while (rs.next()) {
-                if (!containsOrder(orders, rs)) {
-                    orders.add(new DbOrder(rs));
-                } else {
-                    orders = addOrderDetail(orders, rs);
-                }
+                orders.add(new DbOrder(rs));
             }
             if(orders.isEmpty()) {
                 throw new DatabaseException("No orders was found.");
@@ -126,10 +124,7 @@ public class DbOrder extends Order {
             }
             DbConnPool.disconnect(connection);
         }
-
-
     }
-
     private static boolean containsOrder(ArrayList<Order> orders, ResultSet rs) throws SQLException {
         for (Order o : orders) {
             if (o.getID() == rs.getInt("ID")) {
@@ -146,5 +141,27 @@ public class DbOrder extends Order {
             }
         }
         return orders;
+    }
+
+    public static void sendOrder(Connection connection, UiOrder order) throws DatabaseException {
+        PreparedStatement stmnt = null;
+        try {
+            stmnt = connection.prepareStatement(OrderQueries.sendOrder());
+            stmnt.setDate(1, order.getsDate());
+            stmnt.setString(2,order.getStatus());
+            stmnt.setInt(3,order.getID());
+            stmnt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new DatabaseException();
+        } finally {
+            try {
+                if (stmnt != null)
+                    stmnt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            DbConnPool.disconnect(connection);
+        }
     }
 }
