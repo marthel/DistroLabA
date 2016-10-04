@@ -17,6 +17,11 @@
 <c:set var="cars" value="${requestScope.cItems}"/>
 <c:forEach var="car" items="${cars}" varStatus="i">
     ${car.toString()}<br>
+    <form method="post" action="/removeFromCart">
+        <input type="hidden" name="itemToRemove" value="${car.getModel()}"/>
+        <br>
+        <input type="submit" value="remove"/>
+    </form>
 </c:forEach>
 <form method="post" action="/createOrder">
     first name: <input type="text" name="firstName"/><br/>

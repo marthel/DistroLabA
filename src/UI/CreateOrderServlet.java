@@ -33,7 +33,7 @@ public class CreateOrderServlet extends HttpServlet {
         UiOrder order;
         if(session.getAttribute("role")!=null) {
             ArrayList<UiCar> cars = (ArrayList<UiCar>) session.getAttribute("sCars");
-            request.getSession().removeAttribute("sCars");
+            session.removeAttribute("sCars");
 
             String username = (String) session.getAttribute("username");
             Calendar calendar = Calendar.getInstance();
